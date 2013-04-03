@@ -1,0 +1,5 @@
+%\VignetteIndexEntry{Model Introduction and SSN User Manual}
+\documentclass{article}
+\begin{document}
+\end{document}
+
