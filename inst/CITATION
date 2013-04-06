@@ -1,0 +1,12 @@
+citHeader("To cite R/SSN in publications use:")
+
+citEntry(entry="article",
+	title = "A moving average approach for spatial statistical models of stream networks (with discussion)",
+	author = personList(person(c("Jay", "M."), "Ver Hoef"), person(c("Erin", "E."), "Peterson")), 
+	journal = "Journal of the American Statistical Association",
+	year = 2010, 
+	volume = 105,
+	pages = "6-18",
+	textVersion = "Ver Hoef, J. M. and Peterson, E. E. (2010) A moving average approach for spatial statistical models of stream networks (with discussion). Journal of the American Statistical Association 105:6-18. DOI: 10.1198/jasa.2009.ap08248"
+)
+	
