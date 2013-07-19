@@ -38,11 +38,6 @@ library(SSN)
 ssn <- importSSN(system.file("lsndata/MiddleFork04.ssn", package = "SSN"),
     predpts = "pred1km")
 
-tempFile1 <- tempdir()
-tempFile1 <- paste(tempFile1,".ssn",sep="")
+writeSSN(ssn, filename = paste(tempdir(),"/tempFile.ssn", sep = ""))
 
-
-writeSSN(ssn, filename = tempFile1)
-
-rm(ssn, tempFile1)
 }

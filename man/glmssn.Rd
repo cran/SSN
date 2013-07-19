@@ -12,11 +12,11 @@ and Ver Hoef (2010).
 }
 \usage{
 glmssn(formula, ssn.object, family = "Gaussian", CorModels =
-    c("Exponential.tailup","Exponential.taildown","Exponential.Euclid"),
-		use.nugget = TRUE, use.anisotropy = FALSE, addfunccol = NULL, trialscol = NULL, 
-    EstMeth = "REML", useTailDownWeight = FALSE, trans.power = NULL,trans.shift = 0,
-    control = list(max.range.factor = 4, trunc.pseudo = NULL,
-    maxiter.pseudo = 20, beta.converge = 1e-05))
+  c("Exponential.tailup","Exponential.taildown","Exponential.Euclid"),
+  use.nugget = TRUE, use.anisotropy = FALSE, addfunccol = NULL, trialscol = NULL, 
+  EstMeth = "REML", useTailDownWeight = FALSE, trans.power = NULL,trans.shift = 0,
+  control = list(max.range.factor = 4, trunc.pseudo = NULL,
+  maxiter.pseudo = 20, beta.converge = 1e-05))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -162,12 +162,15 @@ and Ver Hoef (2010).
     ssn.object = ssn.object, # input object of class "SpatialStreamNetwork"
 
     sampinfo = list( # sample information
-    ind.obs = ind[order(data[,"pid"])], # indicator vector for non-missing response values
+    # indicator vector for non-missing response values
+    ind.obs = ind[order(data[,"pid"])], 
     sample.size = n.all, # total number of records in the data frame
-    obs.sample.size = n.allxy,  # number of records with non-missing response values
+    # number of records with non-missing response values
+    obs.sample.size = n.allxy, 
     missing.sample.size = n.all - n.allxy, # number of missing response values
     rankX = p, # rank of X
-    z = zt[order(dataXY.out$datasets$data2[,"pid"])], # vector of the response variable
+    # vector of the response variable
+    z = zt[order(dataXY.out$datasets$data2[,"pid"])], 
     X = X2[order(dataXY.out$datasets$data2[,"pid"]),], # design matrix
     effnames = dataXY.out$Xmats$effnames,
     setzero = dataXY.out$indvecs$setzero,
@@ -179,13 +182,16 @@ and Ver Hoef (2010).
 
     estimates = list(
     theta=parmest, # estimated covariance parameters
-    V = V[order(dataXY.out$datasets$data2[,"pid"]),  # estimated covariance matrix
+    # estimated covariance matrix
+    V = V[order(dataXY.out$datasets$data2[,"pid"]),
     order(dataXY.out$datasets$data2[,"pid"])],
-    Vi = Vi[order(dataXY.out$datasets$data2[,"pid"]), # inverse of estimated covariance matrix
+    # inverse of estimated covariance matrix
+    Vi = Vi[order(dataXY.out$datasets$data2[,"pid"]), 
     order(dataXY.out$datasets$data2[,"pid"])],
     betahat = b.hat, # estimated fixed effects
     covb = covb, # estimated covariance matrix of estimated fixed effects
-    covbi = covbi, # inverse of estimated covariance matrix of estimated fixed effects
+    # inverse of estimated covariance matrix of estimated fixed effects
+    covbi = covbi, 
     m2LL = m2LL # -2 times log-likelihood
     ),
 

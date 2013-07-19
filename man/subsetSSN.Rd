@@ -48,14 +48,10 @@ library(SSN)
 ssn <- importSSN(system.file("lsndata/MiddleFork04.ssn", package = "SSN"),
     predpts = "pred1km")
 
-tempFile1 <- tempdir()
-tempFile1 <- paste(tempFile1,".ssn",sep="")
-tempFile2 <- tempdir()
-tempFile2 <- paste(tempFile2,"2.ssn",sep="")
+ssn.sub1 <- subsetSSN(ssn, filename = 
+  paste(tempdir(),"/subset1.ssn", sep = ""), subset = Summer_mn > 13)
+ssn.sub2 <- subsetSSN(ssn, filename = 
+  paste(tempdir(),"/subset2.ssn", sep = ""), subset = netID == 1, clip = TRUE)
 
-ssn.sub1 <- subsetSSN(ssn, filename = tempFile1, subset = Summer_mn > 13)
-ssn.sub2 <- subsetSSN(ssn, filename = tempFile2, subset = netID == 1, clip = TRUE)
-
-rm(ssn, ssn.sub1, ssn.sub2, tempFile1, tempFile2)
 
 }

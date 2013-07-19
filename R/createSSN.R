@@ -128,10 +128,10 @@ iterativeTreeLayout <- function(n)
 
 createSSN <- function(n, obsDesign, predDesign = noPoints, path, importToR = FALSE, treeFunction = igraphKamadaKawai)
 {
-	if(!require(igraph))
-	{
-		stop("simulate requires access to the igraph package")
-	}
+#	if(!require(igraph))
+#	{
+#		stop("simulate requires access to the igraph package")
+#	}
 	if(missing(obsDesign)) stop("Input obsDesign cannot be missing")
 	if(missing(path)) stop("Path cannot be missing")
 	if(missing(n))
