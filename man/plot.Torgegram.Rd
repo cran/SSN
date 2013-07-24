@@ -11,7 +11,9 @@ Plotting Method for Torgegram Objects
   to be presented separately for flow-connected and flow-unconnected sites.
 }
 \usage{
-\method{plot}{Torgegram}(x, sp.relationship = c("fc", "fu"), min.cex = 1.5, max.cex = 6, leg.auto = TRUE, main = "", ylab = "",	xlab = "Stream Distance", ... )
+\method{plot}{Torgegram}(x, sp.relationship = c("fc", "fu"), 
+  min.cex = 1.5, max.cex = 6, leg.auto = TRUE, main = "", ylab = "",	
+  xlab = "Stream Distance", ... )
 }
 \arguments{
   \item{x}{

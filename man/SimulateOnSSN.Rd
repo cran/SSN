@@ -13,11 +13,12 @@ distributions.
 }
 
 \usage{
-SimulateOnSSN(ssn.object, ObsSimDF, PredSimDF = NULL, PredID = NULL,
-    formula, coefficients,
-	CorModels = c("Exponential.tailup", "Exponential.taildown", "Exponential.Euclid"),
-	use.nugget = TRUE, use.anisotropy = FALSE, CorParms = c(1, 10000, 1, 10000, 1, 10000, 0.1),
-	addfunccol = NULL, useTailDownWeight = FALSE, family = "Gaussian", mean.only=FALSE)
+SimulateOnSSN(ssn.object, ObsSimDF, PredSimDF = NULL, PredID = NULL, 
+  formula, coefficients,
+  CorModels = c("Exponential.tailup", "Exponential.taildown", "Exponential.Euclid"),
+  use.nugget = TRUE, use.anisotropy = FALSE, 
+  CorParms = c(1, 10000, 1, 10000, 1, 10000, 0.1),
+  addfunccol = NULL, useTailDownWeight = FALSE, family = "Gaussian", mean.only=FALSE)
 }
 
 \arguments{

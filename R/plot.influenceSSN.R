@@ -46,7 +46,7 @@ function(x, color.palette = NULL, nclasses = NULL,
     	jmax <- upper.breaks[j]
         jmin <- lower.breaks[j]
         indj <- data[,inflcol] >= jmin & data[,inflcol] <= jmax
-      	points(x$ssn.object@obspoints@SSNPoints[[1]]@point.coords[indj,],
+      	points(x$ssn.object@obspoints@SSNPoints[[1]]@point.coords[indj,,drop = FALSE],
                col = color.palette[j], pch = pch, ...)
     }
 

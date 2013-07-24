@@ -9,9 +9,10 @@ Plotting Method for SpatialStreamNetwork Objects
   SpatialStreamNetwork objects that have been created in SSN.
 }
 \usage{
-\method{plot}{SpatialStreamNetwork}(x, VariableName=NULL, color.palette
-= NULL, nclasses = NULL, breaktype = "quantile", brks = NULL, PredPointsID = NULL,
-add = FALSE, addWithLegend=FALSE, lwdLineCol = NULL, lwdLineEx = 1, lineCol = "black", ...)
+\method{plot}{SpatialStreamNetwork}(x, VariableName=NULL, color.palette= NULL, 
+  nclasses = NULL, breaktype = "quantile", brks = NULL, PredPointsID = NULL,
+  add = FALSE, addWithLegend=FALSE, lwdLineCol = NULL, lwdLineEx = 1, 
+  lineCol = "black", ...)
 }
 \arguments{
   \item{x}{

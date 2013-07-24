@@ -32,7 +32,7 @@ sites based on the results stored within an object of class glmssn
 }
 \value{
   The overall structure is the same as an object of class \code{glmssn}, except
-  the prediction points data.frame in the SpatialStreamNetwork object (list-item 2)is appended by the
+  the prediction points data.frame in the SpatialStreamNetwork object (list-item 2) is appended by the
   following columns:
   \preformatted{
     <response name> # The prediction value for each prediction site
@@ -52,7 +52,8 @@ Jay Ver Hoef \email{support@SpatialStreamNetworks.com}
 library(SSN)
 data(modelFits)
 #Update the fitSp path, will vary for each users installation
-fitSp$ssn.object <- updatePath(fitSp$ssn.object, system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
+fitSp$ssn.object <- updatePath(fitSp$ssn.object, 
+  system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
 names(fitSp)
 names(fitSp$ssn.object)
 
