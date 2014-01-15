@@ -1,10 +1,7 @@
 createDistMat <-
 function(ssn, predpts = NULL, o.write = FALSE, amongpreds = FALSE) {
 
-
   #start.time <- Sys.time()
-
-  require(RSQLite)
 
   if(amongpreds && (missing(predpts) || is.null(predpts)))
   {

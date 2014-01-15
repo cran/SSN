@@ -1,4 +1,4 @@
-additive.function <- function(ssn, VarName, afvName)
+additive.function.rohan <- function(ssn, VarName, afvName)
 {
 	influenceColumn<- VarName
 	functionalColumn <- afvName

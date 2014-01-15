@@ -3,7 +3,6 @@ Torgegram <- function(object, ResponseName,
 	EmpVarMeth = "MethMoment")
 {
 	if(class(object) == "influenceSSN") object <- object$ssn.object
-	require(RSQLite)
 	data <- object@obspoints@SSNPoints[[1]]@point.data
 	data <- cbind(data, object@obspoints@SSNPoints[[1]]@point.coords)
 	xcol <- "coords.x1"

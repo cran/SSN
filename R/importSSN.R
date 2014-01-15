@@ -1,8 +1,6 @@
 importSSN <-
 function(filepath, predpts = NULL, o.write = FALSE) {
 
-#  require(maptools)
-  require(RSQLite)
   old.wd <- getwd()
 
   Path <- dirname(filepath)

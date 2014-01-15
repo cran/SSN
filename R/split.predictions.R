@@ -1,7 +1,7 @@
 
 split.predictions.createDistMat <- function(ssn, predpts = NULL, o.write = FALSE)
 {
-	require(RSQLite)
+
 
 	if(missing(predpts) || is.null(predpts) || length(predpts) == 0)
 	{
