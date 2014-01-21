@@ -32,7 +32,8 @@ glmssn <- function(formula, ssn.object,
 		trans.shift = trans.shift,
 		control = control
 	)
-
+  cl = match.call()
+  output$args[["call"]] = cl
 	return(output)
 
 }

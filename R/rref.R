@@ -27,7 +27,7 @@ rref <- function(A, tol=sqrt(.Machine$double.eps),verbose=FALSE,
 		A <- A - outer(A[,i], row)      # sweep
 		A[i,] <- row                    # restore current row
 		if (verbose)
-			if (fractions) print(MASS:::fractions(A))
+			if (fractions) print(MASS::fractions(A))
 			else print(round(A,round(abs(log(tol,10)))))
 	}
 	for (i in 1:n)

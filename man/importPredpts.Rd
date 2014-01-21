@@ -100,8 +100,8 @@ fitSp$ssn@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
 # NOT RUN
 #fitSpPred <- predict(fitSp,"pred1km")
 #plot(fitSpPred)
-fitSp <- importPredpts(target = fitSp, predpts = "Knapp", 
-  obj.type = "glm")
+#fitSp <- importPredpts(target = fitSp, predpts = "Knapp", 
+#  obj.type = "glm")
 # NOT RUN
 #fitSpPredKnapp <- predict(fitSp,"Knapp")
 #plot(fitSpPredKnapp)

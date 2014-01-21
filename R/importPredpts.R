@@ -1,7 +1,6 @@
 importPredpts <-
 function(target, predpts, obj.type) {
-#    require(maptools)
-    require(RSQLite)
+
     old_wd <- getwd()
     on.exit(setwd(old_wd))
 

@@ -16,7 +16,7 @@ glmssn1 <- function(formula, ssn.object,
 		beta.converge = 1e-5)
 )
 {
-	require(RSQLite)
+
         Warnlog <- NULL
 	data <- ssn.object@obspoints@SSNPoints[[1]]@point.data
 	data <- cbind(data, ssn.object@obspoints@SSNPoints[[1]]@point.coords)
