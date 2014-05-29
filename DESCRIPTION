@@ -1,17 +1,17 @@
 Package: SSN
 Type: Package
 Title: Spatial Modeling on Stream Networks
-Version: 1.1.2
-Date: 2014-1-15
-Depends: R (>= 3.0.2), RSQLite
-Imports: MASS, igraph (>= 0.6), maptools, lattice, sp, methods
+Version: 1.1.3
+Date: 2014-5-27
+Depends: R (>= 3.0.2), RSQLite, sp
+Imports: MASS, igraph (>= 0.6), maptools, lattice, methods
 Author: Jay Ver Hoef and Erin Peterson
 Maintainer: Jay Ver Hoef <ver.hoef@SpatialStreamNetworks.com>
 Description: Geostatistical modeling for data on stream networks, including models based on in-stream distance.  Models are created using moving average constructions. Spatial linear models, including covariates, can be fit with ML or REML.  Mapping and other graphical functions are included.
 License: GPL-2
 LazyLoad: yes
 LinkingTo: BH
-Packaged: 2014-01-21 09:02:44 UTC; jay
+Packaged: 2014-05-29 07:49:29 UTC; jay
 NeedsCompilation: yes
 Repository: CRAN
-Date/Publication: 2014-01-21 11:24:42
+Date/Publication: 2014-05-29 19:27:52

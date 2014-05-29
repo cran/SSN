@@ -56,7 +56,11 @@ write.dbf.SSN <- function(dataframe, file, factor2char = TRUE, max_nchar = 254)
             scale[i] <- min(precision[i] - ifelse(mrx > 0L, mrx+3L, 3L), 15L)
                     # modified RSB 2005-03-10 and 2005-04-17
         } else if (is.character(x)) {
-            mf <- max(nchar(x[!is.na(x)], "b"))
+            if(length(x) == sum(is.na(x))){
+                mf = max_nchar
+            } else {
+                mf <- max(nchar(x[!is.na(x)], "b"))
+            }
             p <- max(nlen, mf)
             if(p > max_nchar)
                 warning(gettext("character column %d will be truncated to %d bytes", i, max_nchar), domain = NA)

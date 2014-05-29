@@ -1,30 +1,32 @@
-\name{GR2}
-\alias{GR2}
+\name{AIC}
+\alias{AIC.glmssn}
 \title{
-Generalised R2
+AIC for glmssn objects
 }
 \description{
-  \command{GR2} is a generic function that calculates and displays the
-  generalised R2 value for fitted \code{glmssn} objects.
+  \command{AIC.glmssn} is a method that calculates AIC for fitted \code{glmssn} objects.
 }
 \usage{
-  GR2(object)
+  \method{AIC}{glmssn}(object, ..., k = 2)
 }
 
 \arguments{
   \item{object}{
     an object of class \link{glmssn}
   }
+  \item{...}{
+    optionally more fitted model objects
+  }
+  \item{k}{
+    numeric, the penalty per parameter to be used; 
+    the default k = 2 is the classical AIC. 
+  }
 }
 \details{
-  The generalised R2 value, or \sQuote{coefficient of
-  determination}, lies somewhere between 0 and 1, and is a general measure of
-  the predictive power of a model. In this instance, it relates to the
-  proportion of the variability in the data that is explained by the 
-  fixed effects.
+  \link{AIC} is a generic function and this implements a method for \code{glmssn} objects
 }
 \value{
-  a numeric value equal to the GR2 for the specified \code{glmssn} object
+  a numeric AIC value for the specified \code{glmssn} object
 }
 
 \author{
@@ -54,6 +56,9 @@ data(modelFits)
 #make sure fitSP has the correct path, will vary for each users installation
 fitSp$ssn@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
 
-GR2(fitSp)
+#note the model was fitted using REML, so fixed effects have 
+# been integrated out
+summary(fitSp)
+AIC(fitSp)
 
 }

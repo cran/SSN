@@ -1,5 +1,7 @@
 useDynLib(SSN, .registration = TRUE)
-export(additive.function, BlockPredict, covparms, createDistMat, EmpiricalSemivariogram, Torgegram, getPreds, glmssn, getSSNdata.frame, GR2, importPredpts, importSSN, InfoCritCompare, noPoints, putSSNdata.frame, plot.Torgegram, plot.glmssn.predict, plot.influenceSSN, plot.SpatialStreamNetwork, predict.glmssn, SimulateOnSSN, residuals.glmssn, subsetSSN, summary.SpatialStreamNetwork, varcomp, CrossValidationSSN, CrossValidationStatsSSN, BLUP, writeSSN, updatePath, splitPredictions, print.summary.glmssn)
+export(additive.function, BlockPredict, covparms, createDistMat, EmpiricalSemivariogram, Torgegram, getPreds, glmssn, getSSNdata.frame, GR2, importPredpts, importSSN, InfoCritCompare, noPoints, putSSNdata.frame, plot.Torgegram, plot.glmssn.predict, plot.influenceSSN, plot.SpatialStreamNetwork, predict.glmssn, SimulateOnSSN, residuals.glmssn, subsetSSN, summary.SpatialStreamNetwork, varcomp, CrossValidationSSN, CrossValidationStatsSSN, BLUP, writeSSN, updatePath, splitPredictions, print.summary.glmssn, getStreamDistMat, as.SpatialLines, as.SpatialLines.SpatialStreamNetwork,
+as.SpatialPoints, as.SpatialPoints.SpatialStreamNetwork, as.SpatialPointsDataFrame,
+as.SpatialPointsDataFrame.SpatialStreamNetwork)
 export(binomialDesign, hardCoreDesign, poissonDesign, systematicDesign)
 export(createSSN, iterativeTreeLayout, igraphKamadaKawai)
 importFrom(graphics,boxplot)
@@ -24,4 +26,7 @@ S3method(print, summary.glmssn)
 S3method(print, influenceSSN)
 S3method(predict, glmssn)
 S3method(AIC, glmssn)
+S3method(as.SpatialLines, SpatialStreamNetwork)
+S3method(as.SpatialPoints, SpatialStreamNetwork)
+S3method(as.SpatialPointsDataFrame, SpatialStreamNetwork)
 import(igraph, MASS, maptools, lattice, sp, methods, RSQLite)
