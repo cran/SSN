@@ -1,7 +1,6 @@
 
 split.predictions.createDistMat <- function(ssn, predpts = NULL, o.write = FALSE)
-{
-
+	{
 
 	if(missing(predpts) || is.null(predpts) || length(predpts) == 0)
 	{
@@ -23,10 +22,12 @@ split.predictions.createDistMat <- function(ssn, predpts = NULL, o.write = FALSE
 	#cast netID to a factor for every set of predpoints
 	for(i in 1:length(ssn@predpoints@SSNPoints))
 	{
-		ssn@predpoints@SSNPoints[[i]]@point.data$netID<- as.factor(ssn@predpoints@SSNPoints[[i]]@point.data$netID)
+		ssn@predpoints@SSNPoints[[i]]@point.data$netID<-
+                    as.factor(ssn@predpoints@SSNPoints[[i]]@point.data$netID)
 	}
 	#and also for the observed points
-	ssn@obspoints@SSNPoints[[1]]@network.point.coords$NetworkID<- as.factor(ssn@obspoints@SSNPoints[[1]]@network.point.coords$NetworkID)
+	ssn@obspoints@SSNPoints[[1]]@network.point.coords$NetworkID<-
+            as.factor(ssn@obspoints@SSNPoints[[1]]@network.point.coords$NetworkID)
 
 	#Initialise binaryID.db
 	if (file.exists(file.path(ssn@path,"binaryID.db")) == FALSE)
@@ -34,13 +35,14 @@ split.predictions.createDistMat <- function(ssn, predpts = NULL, o.write = FALSE
 		stop("binaryID.db is missing from ssn object")
 	}
 
-	driver<- dbDriver("SQLite")
+	driver <- RSQLite::SQLite()
 	connect.name <- file.path(ssn@path,"binaryID.db")
 	connect <- dbConnect(SQLite(), connect.name)
 	#close sqlite connection on function exit
 	on.exit({
-	  sqliteCloseConnection(connect)
-	  sqliteCloseDriver(driver)
+          dbDisconnect(connect)
+	  ##sqliteCloseConnection(connect)
+	  ##sqliteCloseDriver(driver)
 	}, add=TRUE)
 
 	net.count <- length(levels(ssn@network.line.coords$NetworkID))
@@ -75,7 +77,8 @@ split.predictions.createDistMat <- function(ssn, predpts = NULL, o.write = FALSE
 			workspace.name.b <- paste("dist.net", net.num, ".b.RData", sep = "")
 
 			bin.table <- dbReadTable(connect, net.name)
-			exists <- c(file.exists(file.path(ssn@path, "distance", predpt.name, workspace.name.a)), file.exists(file.path(ssn@path, "distance", predpt.name, workspace.name.b)))
+			exists <- c(file.exists(file.path(ssn@path, "distance", predpt.name, workspace.name.a)),
+                                    file.exists(file.path(ssn@path, "distance", predpt.name, workspace.name.b)))
 			if(!o.write)
 			{
 				if(all(exists))
@@ -122,7 +125,8 @@ split.predictions.createDistMat <- function(ssn, predpts = NULL, o.write = FALSE
 					{
 						upDist.i <- ssn@obspoints@SSNPoints[[1]]@network.point.coords[paste(pid.i),"DistanceUpstream"]
 
-						pred.tmp <- as.data.frame(cbind(as.numeric(rownames(ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords[ind.preds,])), as.numeric(levels(ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords$SegmentID[ind.preds]))[ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords$SegmentID[ind.preds]]))
+						pred.tmp <- as.data.frame(cbind(as.numeric(rownames(ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords[ind.preds,])),
+                                                     as.numeric(levels(ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords$SegmentID[ind.preds]))[ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords$SegmentID[ind.preds]]))
 						colnames(pred.tmp)<- c("pid","rid")
 
 						pred.tmp$binaryID <- bin.table$binaryID[match(pred.tmp$rid, bin.table$rid)]
@@ -139,7 +143,8 @@ split.predictions.createDistMat <- function(ssn, predpts = NULL, o.write = FALSE
 
 						ob.j$juncDist <- ssn@network.line.coords$DistanceUpstream[match(ob.j$junc.rid, ssn@network.line.coords$SegmentID)]
 
-						ob.j$upDist.j <- ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords$DistanceUpstream[match(ob.j$pid, as.numeric(rownames(ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords)))]
+						ob.j$upDist.j <- ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords$DistanceUpstream[match(ob.j$pid,
+                                                                 as.numeric(rownames(ssn@predpoints@SSNPoints[[pred.num]]@network.point.coords)))]
 
 						ob.j <-ob.j[order(ob.j[,"pid"]),]
 
@@ -191,6 +196,13 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
 			network.point.coords.size <- nrow(ssn@predpoints@SSNPoints[[i]]@network.point.coords)
 			if(point.coords.size != point.data.size || point.data.size != network.point.coords.size) stop("Size mismatches")
 
+                        pid.vec <- ssn@obspoints@SSNPoints[[1]]@point.data$pid
+                        for(z in 1:pred.len) {
+                            pid.vec <- append(pid.vec, ssn@predpoints@SSNPoints[[z]]@point.data$pid)
+                        }
+                        if(sum(duplicated(pid.vec))>0) stop("Duplicated pid values in ssn")
+                        max.pid <- max(pid.vec)
+
 			old.wd <- getwd()
 			on.exit(setwd(old.wd), add=TRUE)
 			setwd(ssn@path)
@@ -199,7 +211,8 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
 			{
 				npoints <- point.data.size
 				nchunks <- round((npoints / chunksof) + 0.5)
-				if(nchunks > 1000) stop(paste("Specified value of chunksof would result in prediction points set ", predpointsID, " being split into more than 1000 prediction sets", sep=""))
+				if(nchunks > 1000) stop(paste("Specified value of chunksof would result in prediction points set ",
+                                        predpointsID, " being split into more than 1000 prediction sets", sep=""))
 				chunks <- seq.int(1, point.data.size, chunksof)
 				if(tail(chunks, 1) != point.data.size) chunks <- c(chunks, point.data.size+1)
 				for(j in 1:(length(chunks)-1))
@@ -208,14 +221,44 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
 					subsetted.coords <- ssn@predpoints@SSNPoints[[i]]@point.coords[chunks[j]:(chunks[j+1]-1), ,drop=FALSE]
 					subsetted.data <- ssn@predpoints@SSNPoints[[i]]@point.data[chunks[j]:(chunks[j+1]-1), ,drop=FALSE]
 					subsetted.network.point.coords <- ssn@predpoints@SSNPoints[[i]]@network.point.coords[chunks[j]:(chunks[j+1]-1), ,drop=FALSE]
-					#write to file
-					subsetted.spatialStructure <- sp::SpatialPointsDataFrame(coords = subsetted.coords, data = subsetted.data, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
+
+                                        ## Set subsetted.coords pid
+                                        ##sub.size <- nrow(subsetted.coords)
+                                        tmp.pid <- as.numeric(row.names(subsetted.coords))
+                                        tmp.pid <- tmp.pid + max.pid
+                                        if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                        rownames(subsetted.coords) <- tmp.pid
+                                        rm(tmp.pid)
+
+                                        ## set subsetted.data pid
+                                        if(sum(subsetted.data$pid != rownames(subsetted.data))>0) stop("rownames do not match pid values in point.data")
+                                        tmp.pid <- subsetted.data$pid + max.pid
+                                        if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                        rownames(subsetted.data) <- tmp.pid
+                                        subsetted.data$pid <- tmp.pid
+                                        rm(tmp.pid)
+
+                                        ## set subsetted.network.point.coords pid
+                                        tmp.pid <- as.numeric(row.names(subsetted.network.point.coords))
+                                        tmp.pid <- tmp.pid + max.pid
+                                        if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                        rownames(subsetted.network.point.coords) <- tmp.pid
+                                        attributes(subsetted.network.point.coords)$locID <- as.numeric(levels(subsetted.data$locID))[subsetted.data$locID]
+                                        pid.vec <- append(pid.vec, tmp.pid)
+                                        rm(tmp.pid)
+
+					##write to file
+					subsetted.spatialStructure <- sp::SpatialPointsDataFrame(coords = subsetted.coords,
+                                                  data = subsetted.data, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
 					maptools::writeSpatialShape(subsetted.spatialStructure, new.id)
 
 					#and alter the existing object
 					new.index <- length(ssn@predpoints@ID) + 1
 					ssn@predpoints@ID[[new.index]] <- new.id
-					ssn@predpoints@SSNPoints[[new.index]] <- new("SSNPoint", point.coords = subsetted.coords, point.data = subsetted.data, network.point.coords = subsetted.network.point.coords, points.bbox = ssn@predpoints@SSNPoints[[i]]@points.bbox, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
+					ssn@predpoints@SSNPoints[[new.index]] <- new("SSNPoint", point.coords = subsetted.coords,
+                                                  point.data = subsetted.data, network.point.coords = subsetted.network.point.coords,
+                                                  points.bbox = ssn@predpoints@SSNPoints[[i]]@points.bbox,
+                                                  proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
 				}
 				new.predids <- paste(predpointsID,"-", 1:(length(chunks)-1), sep="")
 			}
@@ -229,19 +272,47 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
 				subsetted.data <- ssn@predpoints@SSNPoints[[i]]@point.data[values, ,drop=FALSE]
 				subsetted.network.point.coords <- ssn@predpoints@SSNPoints[[i]]@network.point.coords[values, ,drop=FALSE]
 
-				subsetted.spatialStructure <- sp::SpatialPointsDataFrame(coords = subsetted.coords, data = subsetted.data, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
+                                ## Set subsetted.coords pid
+                                tmp.pid <- as.numeric(row.names(subsetted.coords))
+                                tmp.pid <- tmp.pid + max.pid
+                                if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                rownames(subsetted.coords) <- tmp.pid
+                                rm(tmp.pid)
+
+                                ## set subsetted.data pid
+                                if(sum(subsetted.data$pid != rownames(subsetted.data))>0) stop("rownames do not match pid values in point.data")
+                                tmp.pid <- subsetted.data$pid + max.pid
+                                if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                rownames(subsetted.data) <- tmp.pid
+                                subsetted.data$pid <- tmp.pid
+                                rm(tmp.pid)
+
+                                ## set subsetted.network.point.coords pid
+                                tmp.pid <- as.numeric(row.names(subsetted.network.point.coords))
+                                tmp.pid <- tmp.pid + max.pid
+                                if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                rownames(subsetted.network.point.coords) <- tmp.pid
+                                attributes(subsetted.network.point.coords)$locID <- as.numeric(levels(subsetted.data$locID))[subsetted.data$locID]
+                                pid.vec <- append(pid.vec, tmp.pid)
+                                rm(tmp.pid)
+
+				subsetted.spatialStructure <- sp::SpatialPointsDataFrame(coords = subsetted.coords,
+                                          data = subsetted.data, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
 				maptools::writeSpatialShape(subsetted.spatialStructure, new.id)
 
 				#and alter the existing object
 				new.index <- length(ssn@predpoints@ID) + 1
 				ssn@predpoints@ID[[new.index]] <- new.id
 
-				ssn@predpoints@SSNPoints[[new.index]] <- new("SSNPoint", point.coords = subsetted.coords, point.data = subsetted.data, network.point.coords = subsetted.network.point.coords, points.bbox = ssn@predpoints@SSNPoints[[i]]@points.bbox, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
+				ssn@predpoints@SSNPoints[[new.index]] <- new("SSNPoint", point.coords = subsetted.coords,
+                                      point.data = subsetted.data, network.point.coords = subsetted.network.point.coords,
+                                      points.bbox = ssn@predpoints@SSNPoints[[i]]@points.bbox,
+                                      proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
 				new.predids <- new.id
 			}
 			else
 			{
-				if(!(by %in% colnames(ssn@predpoints@SSNPoints[[i]]@point.data))) stop(paste("Could not find column named ", by, " in point.coords entry of specified prediction points set", sep=""))
+				if(!(by %in% colnames(ssn@predpoints@SSNPoints[[i]]@point.data))) stop(paste("Could not find column named ",by, " in point.coords entry of specified prediction points set", sep=""))
 				current.class <- class(ssn@predpoints@SSNPoints[[i]]@point.data[[by]])
 				if(current.class != "factor") warning(paste("Column named ", by, " had class ", current.class, " instead of class factor. Casting to factor....", sep=""))
 				ssn@predpoints@SSNPoints[[i]]@point.data[[by]] <- as.factor(ssn@predpoints@SSNPoints[[i]]@point.data[[by]])
@@ -257,15 +328,44 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
 					subsetted.coords <- ssn@predpoints@SSNPoints[[i]]@point.coords[relevant,, drop=FALSE]
 					subsetted.network.point.coords <- ssn@predpoints@SSNPoints[[i]]@network.point.coords[relevant,,drop=FALSE]
 					subsetted.data[[by]] <- rep(level, length(subsetted.data[[by]]))
+
+                                        ## Set subsetted.coords pid
+                                        tmp.pid <- as.numeric(row.names(subsetted.coords))
+                                        tmp.pid <- tmp.pid + max.pid
+                                        if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                        rownames(subsetted.coords) <- tmp.pid
+                                        rm(tmp.pid)
+
+                                        ## set subsetted.data pid
+                                        if(sum(subsetted.data$pid != rownames(subsetted.data))>0) stop("rownames do not match pid values in point.data")
+                                        tmp.pid <- subsetted.data$pid + max.pid
+                                        if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                        rownames(subsetted.data) <- tmp.pid
+                                        subsetted.data$pid <- tmp.pid
+                                        rm(tmp.pid)
+
+                                        ## set subsetted.network.point.coords pid
+                                        tmp.pid <- as.numeric(row.names(subsetted.network.point.coords))
+                                        tmp.pid <- tmp.pid + max.pid
+                                        if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
+                                        rownames(subsetted.network.point.coords) <- tmp.pid
+                                        attributes(subsetted.network.point.coords)$locID <- as.numeric(levels(subsetted.data$locID))[subsetted.data$locID]
+                                        pid.vec <- append(pid.vec, tmp.pid)
+                                        rm(tmp.pid)
+
 					#write to file
-					subsetted.spatialStructure <- sp::SpatialPointsDataFrame(coords = subsetted.coords, data = subsetted.data, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
+					subsetted.spatialStructure <- sp::SpatialPointsDataFrame(coords = subsetted.coords,
+                                            data = subsetted.data, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
 					maptools::writeSpatialShape(subsetted.spatialStructure, new.id)
 
 					#and alter the existing object
 					new.index <- length(ssn@predpoints@ID) + 1
 					ssn@predpoints@ID[[new.index]] <- new.id
 
-					ssn@predpoints@SSNPoints[[new.index]] <- new("SSNPoint", point.coords = subsetted.coords, point.data = subsetted.data, network.point.coords = subsetted.network.point.coords, points.bbox = ssn@predpoints@SSNPoints[[i]]@points.bbox, proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
+					ssn@predpoints@SSNPoints[[new.index]] <- new("SSNPoint", point.coords = subsetted.coords,
+                                            point.data = subsetted.data, network.point.coords = subsetted.network.point.coords,
+                                            points.bbox = ssn@predpoints@SSNPoints[[i]]@points.bbox,
+                                            proj4string = ssn@predpoints@SSNPoints[[i]]@proj4string)
 				}
 			}
 			found.pred <- TRUE

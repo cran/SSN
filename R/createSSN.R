@@ -504,14 +504,26 @@ createSSN <- function(n, obsDesign, predDesign = noPoints, path, importToR = FAL
 		#aggregate some more informative data into location_data_this_network
 		if(n_locations_this_network > 0)
 		{
+
 			pred_location_data_this_network <- t(apply(pred_location_data, 1, f))
-			if(length(pred_location_data_this_network) == 0)
-			{
+			if(length(pred_location_data_this_network) > 0){
+                        	colnames(pred_location_data_this_network) <- c("NEAR_X", "NEAR_Y", "upDist")
+			} else {
 				pred_location_data_this_network <- matrix(0, 0, 3)
 				colnames(pred_location_data_this_network) <- c("NEAR_X", "NEAR_Y", "upDist")
 			}
 			obs_location_data_this_network <- t(apply(obs_location_data, 1, f))
-			obs_pids <- (1:n_obs_sites[netid]) + cumulative_pids
+			if(length(obs_location_data_this_network) > 0){
+                        	colnames(obs_location_data_this_network) <- c("NEAR_X", "NEAR_Y", "upDist")
+			} else	{
+				obs_location_data_this_network <- matrix(0, 0, 3)
+				colnames(obs_location_data_this_network) <- c("NEAR_X", "NEAR_Y", "upDist")
+			}
+			if(n_obs_sites[netid] > 0)
+			{
+				obs_pids <- (1:n_obs_sites[netid]) + cumulative_pids
+			}
+			else obs_pids <- integer(0)
 			if(n_pred_sites[netid] > 0)
 			{
 				pred_pids <- n_obs_sites[netid] + (1:n_pred_sites[netid]) + cumulative_pids

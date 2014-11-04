@@ -1,5 +1,6 @@
-%\VignetteIndexEntry{Model Introduction and SSN User Manual}
+%\VignetteIndexEntry{SSN User manual}
 \documentclass{article}
 \begin{document}
 Stangle()
 \end{document}
+

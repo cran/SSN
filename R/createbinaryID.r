@@ -14,7 +14,7 @@ createBinaryID <- function(ssn, o.write) {
   m <- try(if (file.exists("binaryID.db") == FALSE) {
     mm<- F
     # DEFINE DATABASE DRIVER
-    driver<-dbDriver("SQLite")
+    driver <- RSQLite::SQLite() 
 
     # DEFINE CONNECTION and create a new table
     db.name <- "binaryID.db"
@@ -40,28 +40,34 @@ createBinaryID <- function(ssn, o.write) {
         dbRemoveTable(connect, network)
       }
 
-      dbWriteTable(connect, network, read.table(file = file.name, header = T, sep = ",", colClasses = c("numeric","character")),
-        overwrite = T, row.names = F, col.names = T)
+      dbWriteTable(connect, network, read.table(file = file.name, header = T, sep = ",",
+        colClasses = c("numeric","character")),overwrite = T, row.names = F)
+
+      ## dbWriteTable(connect, network, read.table(file = file.name, header = T, sep = ",", colClasses = c("numeric","character")),
+      ##   overwrite = T, row.names = F, col.names = T)
 
       # Check to ensure binary files were imported to SQLite database
       if (i == length(net.no)) {
         if (length(dbListTables(connect)) != length(net.no)) {
-          sqliteCloseConnection(connect)
-          sqliteCloseDriver(driver)
+          ##sqliteCloseConnection(connect)
+          dbDisconnect(connect)
+          ##sqliteCloseDriver(driver)
           stop("ERROR: binary tables did not import to SQLite database properly")
         }
       }}
 
     # close the connection and driver
-    sqliteCloseConnection(connect)
-    sqliteCloseDriver(driver)
+    dbDisconnect(connect)
+    ##sqliteCloseConnection(connect)
+    ##sqliteCloseDriver(driver)
   }, silent = TRUE)
   options(show.error.messages = TRUE)
 
   if (mm != T)  {
     if (m !=T) {
-      sqliteCloseConnection(connect)
-      sqliteCloseDriver(driver)
+      dbDisconnect(connect)
+      ##sqliteCloseConnection(connect)
+      ##sqliteCloseDriver(driver)
       stop("ERROR: binary tables did not import to SQLite database properly")}}
 
 }

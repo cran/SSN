@@ -2,7 +2,6 @@ createDistMat <-
 function(ssn, predpts = NULL, o.write = FALSE, amongpreds = FALSE) {
 
   #start.time <- Sys.time()
-
   if(amongpreds && (missing(predpts) || is.null(predpts)))
   {
 	stop("A named collection of prediction points must be specified via the predpts option when amongpreds is TRUE")
@@ -47,15 +46,16 @@ function(ssn, predpts = NULL, o.write = FALSE, amongpreds = FALSE) {
   if (file.exists(file.path(ssn@path,"binaryID.db")) == FALSE)
     stop("binaryID.db is missing from ssn object")
 
-  driver<-dbDriver("SQLite")
+  driver <- RSQLite::SQLite()
   connect.name <- file.path(ssn@path,"binaryID.db")
 
   connect <- dbConnect(SQLite(), connect.name)
 
   ## close sqlite connection upon function exit
   on.exit({
-      sqliteCloseConnection(connect)
-      sqliteCloseDriver(driver)
+      dbDisconnect(connect)
+      ##sqliteCloseConnection(connect)
+      ##sqliteCloseDriver(driver)
   })
 
   if (file.exists(file.path(ssn@path, "binaryID.db")) == TRUE) {

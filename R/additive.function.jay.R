@@ -1,6 +1,7 @@
 additive.function <- function(ssn, VarName, afvName)
 {
 
+
 	if(!(VarName %in% colnames(ssn@data)))
 	{
 		stop(paste("Column ", VarName, " not found in ssn object", sep=""))
@@ -11,8 +12,8 @@ additive.function <- function(ssn, VarName, afvName)
 	ridData <- ssn@data
 
 	ssnPath <- ssn@path
-	driver<-dbDriver("SQLite")
-	connect.name <- file.path(ssnPath,"binaryID.db")
+	driver <- RSQLite::SQLite()
+ 	connect.name <- file.path(ssnPath,"binaryID.db")
 
 	connect <- dbConnect(SQLite(), connect.name)
 
@@ -47,17 +48,17 @@ additive.function <- function(ssn, VarName, afvName)
 							afvTableOrd[afvTableOrd[,1] == binAtLength[ind,"rid"][2], 2])
 						pival[pival[,1] == binAtLength[ind,"rid"][1], 2] <-
 							pival[uniqueSplits[j] == binTableOrd[,"binaryID"], 2] * piv
-						pival[pival[,1] == binAtLength[ind,"rid"][2], 2] <- 
+						pival[pival[,1] == binAtLength[ind,"rid"][2], 2] <-
 							pival[uniqueSplits[j] == binTableOrd[,"binaryID"], 2] * (1 - piv)
 					}
-				}		
+				}
 			}
 		}
 		afvStore <- rbind(afvStore, pival)
-	}	
-
-	sqliteCloseConnection(connect)
-	sqliteCloseDriver(driver)
+	}
+        dbDisconnect(connect)
+	##sqliteCloseConnection(connect)
+	##sqliteCloseDriver(driver)
 
 	colnames(afvStore) <- c("rid", afvName)
 	afvStore <- as.data.frame(afvStore)
