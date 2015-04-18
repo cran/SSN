@@ -69,7 +69,7 @@ iterativeTreeLayout <- function(n)
 		tree[i,6] <- length
 		tree[i,7] <- theta
 
-		# calcul de la distance minimum avec les autres segments excepté
+		# calcul de la distance minimum avec les autres segments except
 		# son "pere" et son eventuel "frere" si il existe  
 		dsi <- Inf
 		for (k in 2:(i-1))

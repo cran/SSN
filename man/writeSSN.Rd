@@ -8,7 +8,7 @@ Write a SpatialStreamNetwork Object
   to a new .ssn directory.
 }
 \usage{
-writeSSN(ssn, filename = "")
+writeSSN(ssn, filename = "", o.write = FALSE)
 }
 \arguments{
   \item{ssn}{
@@ -18,6 +18,9 @@ writeSSN(ssn, filename = "")
    the file path to the new .ssn folder, in string format. When writing, include
    the .ssn folder in the path
 }
+  \item{o.write}{
+    If TRUE, overwrite existing ssn. Defaults to \code{FALSE}.
+} 
 }
 
 \value{

@@ -43,9 +43,11 @@ library(SSN)
 #  package = "SSN"), predpts = "pred1km", o.write = TRUE)
 #  use SpatialStreamNetwork object mf04p that was already created
 data(mf04p)
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
 #make sure mf04p has the correct path, will vary for each users installation
-mf04p@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
-    
+mf04p <- updatePath(mf04p, paste0(tempdir(),'/MiddleFork04.ssn'))
+   
 # get some model fits stored as data objects
 data(modelFits)
 #NOT RUN use this one
@@ -54,7 +56,7 @@ data(modelFits)
 #    CorModels = c("Exponential.tailup","Exponential.taildown",
 #    "Exponential.Euclid"), addfunccol = "afvArea")
 #make sure fitSP has the correct path, will vary for each users installation
-fitSp$ssn@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
+fitSp$ssn@path <- paste0(tempdir(),'/MiddleFork04.ssn')
 
 #note the model was fitted using REML, so fixed effects have 
 # been integrated out

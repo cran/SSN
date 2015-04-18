@@ -58,8 +58,10 @@ Rohan Shah \email{support@SpatialStreamNetworks.com}
 library(SSN)
 #use mf04p SpatialStreamNetwork object, already created
 data(mf04p)
-#make sure mf04 has the correct path, will vary for each users installation
-mf04p <- updatePath(mf04p, system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
+#make sure mf04p has the correct path, will vary for each users installation
+mf04p <- updatePath(mf04p, paste0(tempdir(),'/MiddleFork04.ssn'))
 
 #Calculate an additive function value based on an existing column.
 names(mf04p@data)

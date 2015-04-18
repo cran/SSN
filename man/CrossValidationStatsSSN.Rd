@@ -93,8 +93,12 @@ library(SSN)
 #	        package = "SSN"), o.write = TRUE)
 # use SpatialStreamNetwork object mf04 that was already created
 data(mf04)
-#make sure mf04 has the correct path, will vary for each users installation
-mf04 <- updatePath(mf04, system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
+#make sure mf04p has the correct path, will vary for each users installation
+mf04 <- updatePath(mf04, paste0(tempdir(),'/MiddleFork04.ssn'))
+
+
 
 ## NOT RUN Distance Matrix has already been created
 ## createDistMat(mf04)

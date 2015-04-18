@@ -44,8 +44,10 @@ library(SSN)
 #  package = "SSN"), predpts = "pred1km", o.write = TRUE)
 #  use SpatialStreamNetwork object mf04p that was already created
 data(mf04p)
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
 #make sure mf04p has the correct path, will vary for each users installation
-mf04p@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
+mf04p <- updatePath(mf04p, paste0(tempdir(),'/MiddleFork04.ssn'))
 
 # get some model fits stored as data objects
 data(modelFits)
@@ -56,9 +58,12 @@ data(modelFits)
 #    "Exponential.Euclid"), addfunccol = "afvArea")
 #Update the path in fitSp, will vary for each users installation
 fitSp$ssn.object <- updatePath(fitSp$ssn.object, 
-	system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
+  paste0(tempdir(),'/MiddleFork04.ssn'))
 
 # Extract predictions and standard errors for the prediction sites
+# make sure the distance matrix is there
+createDistMat(mf04p, predpts = "pred1km", o.write = TRUE)
+#create predictions
 fitSpPred <- predict(fitSp, predpointsID = "pred1km")
 class(fitSpPred)
 fitSpgetPreds <- getPreds(fitSpPred, pred.type = "pred")

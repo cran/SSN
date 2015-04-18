@@ -227,7 +227,7 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
                                         tmp.pid <- as.numeric(row.names(subsetted.coords))
                                         tmp.pid <- tmp.pid + max.pid
                                         if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
-                                        rownames(subsetted.coords) <- tmp.pid
+                                        rownames(subsetted.coords) <-  format(tmp.pid, scientific = FALSE)
                                         rm(tmp.pid)
 
                                         ## set subsetted.data pid
@@ -242,7 +242,7 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
                                         tmp.pid <- as.numeric(row.names(subsetted.network.point.coords))
                                         tmp.pid <- tmp.pid + max.pid
                                         if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
-                                        rownames(subsetted.network.point.coords) <- tmp.pid
+                                        rownames(subsetted.network.point.coords) <-  format(tmp.pid, scientific = FALSE)
                                         attributes(subsetted.network.point.coords)$locID <- as.numeric(levels(subsetted.data$locID))[subsetted.data$locID]
                                         pid.vec <- append(pid.vec, tmp.pid)
                                         rm(tmp.pid)
@@ -276,7 +276,7 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
                                 tmp.pid <- as.numeric(row.names(subsetted.coords))
                                 tmp.pid <- tmp.pid + max.pid
                                 if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
-                                rownames(subsetted.coords) <- tmp.pid
+                                rownames(subsetted.coords) <-  format(tmp.pid, scientific = FALSE)
                                 rm(tmp.pid)
 
                                 ## set subsetted.data pid
@@ -291,7 +291,7 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
                                 tmp.pid <- as.numeric(row.names(subsetted.network.point.coords))
                                 tmp.pid <- tmp.pid + max.pid
                                 if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
-                                rownames(subsetted.network.point.coords) <- tmp.pid
+                                rownames(subsetted.network.point.coords) <-  format(tmp.pid, scientific = FALSE)
                                 attributes(subsetted.network.point.coords)$locID <- as.numeric(levels(subsetted.data$locID))[subsetted.data$locID]
                                 pid.vec <- append(pid.vec, tmp.pid)
                                 rm(tmp.pid)
@@ -333,7 +333,7 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
                                         tmp.pid <- as.numeric(row.names(subsetted.coords))
                                         tmp.pid <- tmp.pid + max.pid
                                         if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
-                                        rownames(subsetted.coords) <- tmp.pid
+                                        rownames(subsetted.coords) <-  format(tmp.pid, scientific = FALSE)
                                         rm(tmp.pid)
 
                                         ## set subsetted.data pid
@@ -348,7 +348,7 @@ splitPredictions <- function(ssn, predpointsID, chunksof, by, subset, new.id)
                                         tmp.pid <- as.numeric(row.names(subsetted.network.point.coords))
                                         tmp.pid <- tmp.pid + max.pid
                                         if(sum(tmp.pid %in% pid.vec)>0) stop("Duplicate pids exist")
-                                        rownames(subsetted.network.point.coords) <- tmp.pid
+                                        rownames(subsetted.network.point.coords) <- format(tmp.pid, scientific = FALSE)
                                         attributes(subsetted.network.point.coords)$locID <- as.numeric(levels(subsetted.data$locID))[subsetted.data$locID]
                                         pid.vec <- append(pid.vec, tmp.pid)
                                         rm(tmp.pid)

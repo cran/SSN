@@ -103,9 +103,18 @@ Jay Ver Hoef \email{support@SpatialStreamNetworks.com}
 
 library(SSN)
 data(modelFits)
-#make sure fitSp has the correct path, will vary for each users installation
-fitSp$ssn.object@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
+# model was fit for mf04p
+data(mf04p)
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
+#make sure mf04p has the correct path, will vary for each users installation
+mf04p <- updatePath(mf04p, paste0(tempdir(),'/MiddleFork04.ssn'))
 
+#make sure fitSp has the correct path, will vary for each users installation
+fitSp$ssn.object@path <- paste0(tempdir(),'/MiddleFork04.ssn')
+
+# make sure the distance matrix is there
+createDistMat(mf04p, predpts = "pred1km", o.write = TRUE)
 ## create predictions
 ssnpred <- predict(fitSp, "pred1km")
 

@@ -1,16 +1,33 @@
-createDistMat <-
-function(ssn, predpts = NULL, o.write = FALSE, amongpreds = FALSE) {
 
-  #start.time <- Sys.time()
+
+createDistMat <-
+  function(ssn, predpts = NULL, o.write = FALSE, amongpreds = FALSE) {
+
+  if(class(ssn)[1] != "SpatialStreamNetwork") stop("Input is not a SpatialStreamNetwork object")
+  ##start.time <- Sys.time()
   if(amongpreds && (missing(predpts) || is.null(predpts)))
   {
 	stop("A named collection of prediction points must be specified via the predpts option when amongpreds is TRUE")
   }
-  ##Check to see whether distance folder exists...
+
+  ## Stop if distance folder exists, when o.write = FALSE ...
+  if(file.exists(file.path(ssn@path, "distance"))) {
+    if(o.write == FALSE) {
+        stop("Distance folder exists and o.write = FALSE")
+    } else { ## o.write = TRUE
+        ## Remove distance directory
+        unlink(file.path(ssn@path, "distance"), recursive = TRUE)
+        ## Create distance directory
+        dir.create(file.path(ssn@path, "distance"))
+    }
+  }
+
+  ## If distance folder does not exist...
   if (!file.exists(file.path(ssn@path, "distance"))) {
     dir.create(file.path(ssn@path, "distance"))
   }
-  ##And then whether an observation folder exists
+
+  ## Check whether an observation folder exists
   if (!file.exists(file.path(ssn@path, "distance", "obs"))) {
     dir.create(file.path(ssn@path, "distance", "obs"))
   }
@@ -169,7 +186,6 @@ function(ssn, predpts = NULL, o.write = FALSE, amongpreds = FALSE) {
           ob.i_by_locID$locID <- as.numeric(ob.i_by_locID$locID)
           ob.j_reordering <- order(ob.i_by_locID$pid)
 
-
           locID.old <- -1
           ind.dup <- !duplicated(ob.i_by_locID$locID)
 
@@ -251,7 +267,7 @@ function(ssn, predpts = NULL, o.write = FALSE, amongpreds = FALSE) {
             }
           } else {
             ## add column to pred sites
-            if (!is.null(predpts)) {
+            if (!is.null(predpts) && pred.site.no > 0) {
               current_distance_matrix_a[paste(pid.i),]<- current_distance_matrix_a[paste(pid.old),]
               current_distance_matrix_b[,paste(pid.i)]<- current_distance_matrix_b[,paste(pid.old)]}
           }

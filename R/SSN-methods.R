@@ -14,7 +14,7 @@ as.SpatialPoints.SpatialStreamNetwork <- function(x, data = "Obs", ...) {
   return(SpatialPoints(x@obspoints@SSNPoints[[1]]@point.coords,
         proj4string = x@proj4string))
   } else {
-     ind <- x@predpoints@ID %in% data 
+     ind <- x@predpoints@ID %in% data
   if(sum(ind) ==0) {
        stop(paste0(data, " is not present in STSN"))}
      if(sum(ind) > 1) {
@@ -49,3 +49,13 @@ as.SpatialPointsDataFrame.SpatialStreamNetwork <- function(x, data = "Obs", ...)
   return(invisible())
 }
 
+as.SpatialLinesDataFrame <- function(x, ...) {
+    UseMethod("as.SpatialLinesDataFrame")
+}
+
+as.SpatialLinesDataFrame.SpatialStreamNetwork <- function(x, ...) {
+    sl <- SpatialLines(x@lines, proj4string = x@proj4string)
+    data <- x@data
+    sldf <- SpatialLinesDataFrame(sl, data, match.ID = FALSE)
+    sldf
+}

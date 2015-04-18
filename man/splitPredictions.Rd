@@ -73,16 +73,12 @@ Rohan Shah \email{support@SpatialStreamNetworks.com}
 \examples{
 library(SSN)
 
-## Create temporary .ssn directory to work with
-old.wd <- getwd()
-setwd(system.file("lsndata/MiddleFork04.ssn",package = "SSN"))
-file.list <- list.files()
-dir.create("tmp.ssn")
-
-file.copy(file.list, "tmp.ssn", recursive = TRUE)
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
 
 ## Import the SpatialStreamNetwork object
-mf04 <- importSSN("tmp.ssn", predpts = "pred1km")
+mf04 <- importSSN(paste0(tempdir(),'/MiddleFork04.ssn'),
+  predpts = "pred1km")
 
 # Split using the chunksof method
 split1 <- splitPredictions(mf04, "pred1km", chunksof = 100)
@@ -106,8 +102,5 @@ mf04.glmssn$ssn.object <- splitPredictions(mf04.glmssn$ssn.object, "pred1km",
 pred.split<- predict(mf04.glmssn, "netID-1")
 plot(pred.split)
 
-## Delete temporary files and return to workspace
-unlink("tmp.ssn", recursive = TRUE)
-setwd(old.wd)
 }
 

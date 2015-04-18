@@ -59,9 +59,10 @@ library(SSN)
 #  package = "SSN"), o.write = TRUE)
 #  use SpatialStreamNetwork object mf04 that was already created
 data(mf04)
-#make sure mf04 has the correct path, will vary for each users installation
-mf04@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
-names(mf04)
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
+#make sure mf04p has the correct path, will vary for each users installation
+mf04 <- updatePath(mf04, paste0(tempdir(),'/MiddleFork04.ssn'))
 
 mf04p <- mf04
 # add existing prediction points on 1 km spacing

@@ -37,8 +37,10 @@ library(SSN)
 #  package = "SSN"), o.write = TRUE)
 #  use SpatialStreamNetwork object mf04p that was already created
 data(mf04p)
-#Update path in mf04, will vary for each users installation
-mf04p <- updatePath(mf04p, system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
+# for examples, copy MiddleFork04.ssn directory to R's temporary directory
+copyLSN2temp()
+#make sure mf04p has the correct path, will vary for each users installation
+mf04p <- updatePath(mf04p, paste0(tempdir(),'/MiddleFork04.ssn'))
 
 names(mf04p)
 
