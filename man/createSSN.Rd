@@ -93,6 +93,7 @@ ssn1 <- createSSN(c(10, 20, 30), obsDesign = binomialDesign(c(2,4,6)),
 #NOT RUN plot(ssn1)
 
 #Same as above, but using iterativeTreeLayout
+set.seed(5)
 ssn2 <- createSSN(c(10, 20, 30), obsDesign = binomialDesign(c(2,4,6)),
   path=paste(tempdir(),"/simulated2.ssn", sep = ""), importToR = TRUE, 
   treeFunction = iterativeTreeLayout)

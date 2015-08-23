@@ -77,7 +77,7 @@ data(modelFits)
 #make sure fitSp has the correct path, will vary for each users installation
 fitSp$ssn.object@path <- system.file("lsndata/MiddleFork04.ssn", package = "SSN")
 
-resids <- residuals(fitSp)
+resids <- residuals(fitSp,cross.validation = TRUE)
 plot(resids)
 
 ## plot using user-defined breakpoints

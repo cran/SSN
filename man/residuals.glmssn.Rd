@@ -9,7 +9,7 @@ Compute Model Residuals for glmssn Objects
 
 }
 \usage{
-\method{residuals}{glmssn}(object, cross.validation=TRUE, ...)
+\method{residuals}{glmssn}(object, cross.validation=FALSE, ...)
 }
 \arguments{
   \item{object}{
@@ -17,8 +17,8 @@ Compute Model Residuals for glmssn Objects
   }
   \item{cross.validation}{
 	logical value indicating whether leave-one-out cross-validation residuals
-	will be computed. The default is TRUE. Setting \code{cross.validation} to
-	FALSE may decrease processing times for large datasets.
+	will be computed. The default is FALSE. Setting \code{cross.validation} to
+	TRUE may increase processing times for large datasets.
   }
   \item{...}{Other arguments}
 

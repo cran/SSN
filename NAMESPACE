@@ -39,5 +39,14 @@ S3method(as.SpatialLines, SpatialStreamNetwork)
 S3method(as.SpatialPoints, SpatialStreamNetwork)
 S3method(as.SpatialPointsDataFrame, SpatialStreamNetwork)
 S3method(as.SpatialLinesDataFrame, SpatialStreamNetwork)
+  importFrom("grDevices", "colors", "rainbow")
+  importFrom("graphics", "hist", "layout", "legend", "lines", "par",
+             "points", "text")
+  importFrom("stats", "AIC", "as.formula", "contrasts", "glm", "median",
+             "model.frame", "model.matrix", "optim", "optimize",
+             "printCoefmat", "pt", "qqnorm", "qt", "quantile", "rbinom",
+             "residuals", "rnorm", "rpois", "runif", "terms")
+  importFrom("utils", "read.table", "tail", "write.table")
+
 
 

@@ -1,5 +1,5 @@
 residuals.glmssn <-
-function(object, cross.validation=TRUE, ...)
+function(object, cross.validation=FALSE, ...)
 {
 	X <- object$sampinfo$X
 	V <- object$estimates$V
