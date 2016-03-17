@@ -1,8 +1,8 @@
 Package: SSN
 Type: Package
 Title: Spatial Modeling on Stream Networks
-Version: 1.1.6
-Date: 2015-8-20
+Version: 1.1.7
+Date: 2016-3-16
 Depends: R (>= 3.0.2), RSQLite, sp
 Imports: MASS, igraph (>= 1.0.0), maptools, lattice, methods
 Author: Jay Ver Hoef and Erin Peterson
@@ -12,6 +12,6 @@ License: GPL-2
 LazyLoad: yes
 LinkingTo: BH
 NeedsCompilation: yes
-Packaged: 2015-08-23 19:14:46 UTC; jay
+Packaged: 2016-03-17 06:13:16 UTC; jay
 Repository: CRAN
-Date/Publication: 2015-08-23 23:39:54
+Date/Publication: 2016-03-17 13:58:31

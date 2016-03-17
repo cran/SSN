@@ -19,13 +19,14 @@ Compute Crossvalidation Values for glmssn Objects
 
 }
 \details{
-  This function removes the response values one at a time.  Then it uses the 
-  estimated model to predict each of the removed values along with the standard 
+  This function removes the response values one at a time.  Then it uses the
+  estimated model to predict each of the removed values along with the standard
   errors of prediction.
 }
 \value{
-  Output is a data.frame with two columns, the predictions "cv.pred" and
-  their standard errors "cv.se", and the data are in the same order as the data
+  Output is a data.frame with three columns, the point identifier "pid",
+  predictions "cv.pred", and
+  their standard errors "cv.se". The data are in the same order as the data
   in the glmssn object.
 }
 
@@ -36,8 +37,8 @@ Compute Crossvalidation Values for glmssn Objects
 \examples{
 
 library(SSN)
-# NOT RUN 
-# mf04 <- importSSN(system.file("lsndata/MiddleFork04.ssn", 
+# NOT RUN
+# mf04 <- importSSN(system.file("lsndata/MiddleFork04.ssn",
 #	        package = "SSN"), o.write = TRUE)
 # use SpatialStreamNetwork object mf04 that was already created
 data(mf04)
@@ -49,7 +50,7 @@ mf04 <- updatePath(mf04, paste0(tempdir(),'/MiddleFork04.ssn'))
 ## NOT RUN Distance Matrix has already been created
 ## createDistMat(mf04)
 
-# The models take a little time to fit, so they are NOT RUN 
+# The models take a little time to fit, so they are NOT RUN
 # Uncomment the code to run them
 # Alternatively, you can load the fitted models first to look at results
 data(modelFits)

@@ -25,7 +25,7 @@ createSSN(n, obsDesign, predDesign = noPoints, path, importToR = FALSE,
 	A function representing a sampling strategy. It is used to select
 	observation points on the network. Input obsDesign is required and
 	cannot have value noPoints, as there must be at least one observed point generated.
-	point generated. At present the only implemented designs are \link{binomialDesign},
+	At present the only implemented designs are \link{binomialDesign},
 	\link{systematicDesign}, \link{systematicDesign}, \link{poissonDesign} and
 	\link{hardCoreDesign}. For further details, which will allow users to
 	to write your their own design function, please see the \link[=binomialDesign]{design functions}.

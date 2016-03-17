@@ -5,7 +5,14 @@ as.SpatialLines.SpatialStreamNetwork <- function(x, ...) {
   SpatialLines(x@lines, proj4string = x@proj4string)
 }
 
+as.SpatialLinesDataFrame.SpatialStreamNetwork <- function(x, ...) {
+    SpatialLinesDataFrame(x@lines, x@data, proj4string = x@proj4string)
+}
+
+
+
 as.SpatialPoints <- function(x, ...){
+
   UseMethod("as.SpatialPoints")
 }
 

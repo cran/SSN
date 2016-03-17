@@ -13,10 +13,10 @@ distributions.
 }
 
 \usage{
-SimulateOnSSN(ssn.object, ObsSimDF, PredSimDF = NULL, PredID = NULL, 
+SimulateOnSSN(ssn.object, ObsSimDF, PredSimDF = NULL, PredID = NULL,
   formula, coefficients,
   CorModels = c("Exponential.tailup", "Exponential.taildown", "Exponential.Euclid"),
-  use.nugget = TRUE, use.anisotropy = FALSE, 
+  use.nugget = TRUE, use.anisotropy = FALSE,
   CorParms = c(1, 10000, 1, 10000, 1, 10000, 0.1),
   addfunccol = NULL, useTailDownWeight = FALSE, family = "Gaussian", mean.only=FALSE)
 }
@@ -285,7 +285,7 @@ raw2DFpred[,"X1"] <- rnorm(length(raw2DFpred[,1]))
 raw2DFobs[,"F1"] <- as.factor(sample.int(3,length(raw2DFobs[,1]), replace = TRUE))
 raw2DFpred[,"F1"] <- as.factor(sample.int(3,length(raw2DFpred[,1]), replace = TRUE))
 
-## simulate Poisson data
+## simulate Binomial data
 sim2.out <- SimulateOnSSN(raw2.ssn,
 	ObsSimDF = raw2DFobs,
 	PredSimDF = raw2DFpred,
