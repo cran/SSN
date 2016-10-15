@@ -6,12 +6,12 @@
 
 
 SEXP test_fc(SEXP strings, SEXP refstring);
-SEXP additiveFunctionValues(SEXP reachIDs, SEXP binaryIDs, SEXP proportionalInfluences, SEXP netIDs);
+//SEXP additiveFunctionValues(SEXP reachIDs, SEXP binaryIDs, SEXP proportionalInfluences, SEXP netIDs);
 SEXP DoWritedbfSSN(SEXP file, SEXP df, SEXP pr, SEXP sc, SEXP DataTypes);
 
 static const R_CallMethodDef CallEntries[] = {
 	CALLDEF(test_fc, 2),
-	CALLDEF(additiveFunctionValues, 4),
+	//CALLDEF(additiveFunctionValues, 4),
 	CALLDEF(DoWritedbfSSN, 5),
     {NULL, NULL, 0}
 };

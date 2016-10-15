@@ -12,6 +12,7 @@ as.SpatialLinesDataFrame,
 as.SpatialLinesDataFrame.SpatialStreamNetwork)
 export(binomialDesign, hardCoreDesign, poissonDesign, systematicDesign)
 export(createSSN, iterativeTreeLayout, igraphKamadaKawai)
+export(reachNeiSSN, FUSD, FUDJ, FCSD, FCSD01)
 importFrom(graphics,boxplot)
 S3method(hist,SpatialStreamNetwork)
 S3method(hist, influenceSSN)
@@ -45,8 +46,8 @@ S3method(as.SpatialLinesDataFrame, SpatialStreamNetwork)
   importFrom("stats", "AIC", "as.formula", "contrasts", "glm", "median",
              "model.frame", "model.matrix", "optim", "optimize",
              "printCoefmat", "pt", "qqnorm", "qt", "quantile", "rbinom",
-             "residuals", "rnorm", "rpois", "runif", "terms")
+             "residuals", "rnorm", "rpois", "runif", "terms","aggregate",
+             "na.omit")
   importFrom("utils", "read.table", "tail", "write.table")
-
-
-
+importFrom("rgeos","gTouches")
+importFrom("Matrix","Matrix")
