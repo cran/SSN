@@ -71,12 +71,15 @@ writeSSN <- function(ssn, filename, o.write = FALSE) {
   ## sites.sub <- SpatialPointsDataFrame(coords = coords, data = data.tmp, proj4string = proj4string)
   sites.sub <- as.SpatialPointsDataFrame(ssn.tmp)
 
-  writeSpatialShape(sites.sub, "sites")
+  writeOGR(sites.sub, ".", "sites", verbose = FALSE, driver = "ESRI Shapefile")
+  ##writeSpatialShape(sites.sub, "sites")
   write.dbf.SSN(sites.sub@data, "sites")
 
   ## Copy edges --------------------------------------------
   edges.sub <- as.SpatialLinesDataFrame.SpatialStreamNetwork(ssn.tmp)
-  writeSpatialShape(edges.sub, "edges")
+
+  writeOGR(edges.sub, ".", "edges", verbose = FALSE, driver = "ESRI Shapefile")
+  ##writeSpatialShape(edges.sub, "edges")
   write.dbf.SSN(edges.sub@data, "edges")
 
   ## Copy prediction sites
@@ -98,7 +101,8 @@ writeSSN <- function(ssn, filename, o.write = FALSE) {
           ##     proj4string = proj4string)
 
           preds.sub <- as.SpatialPointsDataFrame(ssn.tmp, pred.name)
-          writeSpatialShape(preds.sub, pred.name)
+          writeOGR(preds.sub, ".", pred.name, verbose = FALSE, driver = "ESRI Shapefile")
+          ##writeSpatialShape(preds.sub, pred.name)
           write.dbf.SSN(preds.sub@data, pred.name)
 
           #rm(pred.name, coords, data.tmp, ind.xy, preds.sub)

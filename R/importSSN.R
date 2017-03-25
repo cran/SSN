@@ -16,7 +16,8 @@ function(filepath, predpts = NULL, o.write = FALSE) {
   # does not work with 2.6.1, but seems to work with > 2.8.2
   # Projection information is not imported.
 
-  edges <- readShapeSpatial("edges")
+  edges <- readOGR(".", "edges",verbose = FALSE)
+  ##edges <- readShapeSpatial("edges")
   rownames(edges@data) <- edges@data[,"rid"]
 
 
@@ -27,14 +28,11 @@ function(filepath, predpts = NULL, o.write = FALSE) {
     stop("edges.shp does not have polyline geometry")
   }
 
-  sites <- readShapeSpatial("sites")
+  sites <- readOGR(".", "sites",verbose = FALSE)
+  ##sites <- readShapeSpatial("sites")
   rownames(sites@data) <- sites@data[,"pid"]
   rownames(sites@coords) <- sites@data[,"pid"]
   sites@data$locID <- as.factor(sites@data$locID)
-
-
-
-
 
   if (exists("sites")==0) {
     stop("sites.shp data is missing from ", Path," ssn folder")
@@ -119,7 +117,8 @@ function(filepath, predpts = NULL, o.write = FALSE) {
 
   #Add prediction points here-----------------------------------------------------
   if (!is.null(predpts)) {
-      predpoints <- readShapeSpatial(predpts)
+      predpoints <- readOGR(".", predpts, verbose = FALSE)
+      ##predpoints <- readShapeSpatial(predpts)
       rownames(predpoints@data) <- predpoints@data[,"pid"]
       rownames(predpoints@coords) <- predpoints@data[,"pid"]
       predpoints@data$locID <- as.factor(predpoints@data$locID)
@@ -187,5 +186,7 @@ function(filepath, predpts = NULL, o.write = FALSE) {
 
   #end of function
   ssn
+
+
 }
 

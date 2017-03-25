@@ -1,7 +1,7 @@
 useDynLib(SSN, .registration = TRUE)
 import(igraph, MASS, maptools, lattice, sp, methods, RSQLite)
 importFrom(tools, file_ext)
-export(additive.function, BlockPredict, covparms, createDistMat, EmpiricalSemivariogram, Torgegram, getPreds, glmssn, getSSNdata.frame, GR2, importPredpts, importSSN, InfoCritCompare, noPoints, putSSNdata.frame, plot.Torgegram, plot.glmssn.predict, plot.influenceSSN, plot.SpatialStreamNetwork, predict.glmssn, SimulateOnSSN, residuals.glmssn, subsetSSN, summary.SpatialStreamNetwork, varcomp, CrossValidationSSN, CrossValidationStatsSSN, BLUP, writeSSN, updatePath, splitPredictions, print.summary.glmssn, getStreamDistMat, copyLSN2temp)
+export(additive.function, BlockPredict, covparms, createDistMat, EmpiricalSemivariogram, Torgegram, getPreds, glmssn, getSSNdata.frame, GR2, importPredpts, importSSN, InfoCritCompare, noPoints, putSSNdata.frame, plot.Torgegram, plot.glmssn.predict, plot.influenceSSN, plot.SpatialStreamNetwork, predict.glmssn, SimulateOnSSN, residuals.glmssn, subsetSSN, summary.SpatialStreamNetwork, varcomp, CrossValidationSSN, CrossValidationStatsSSN, BLUP, writeSSN, updatePath, splitPredictions, print.summary.glmssn, getStreamDistMat, copyLSN2temp, getConfusionMat)
 export(as.SpatialLines, 
 as.SpatialLines.SpatialStreamNetwork,
 as.SpatialPoints, 
@@ -12,7 +12,6 @@ as.SpatialLinesDataFrame,
 as.SpatialLinesDataFrame.SpatialStreamNetwork)
 export(binomialDesign, hardCoreDesign, poissonDesign, systematicDesign)
 export(createSSN, iterativeTreeLayout, igraphKamadaKawai)
-export(reachNeiSSN, FUSD, FUDJ, FCSD, FCSD01)
 importFrom(graphics,boxplot)
 S3method(hist,SpatialStreamNetwork)
 S3method(hist, influenceSSN)
@@ -46,8 +45,11 @@ S3method(as.SpatialLinesDataFrame, SpatialStreamNetwork)
   importFrom("stats", "AIC", "as.formula", "contrasts", "glm", "median",
              "model.frame", "model.matrix", "optim", "optimize",
              "printCoefmat", "pt", "qqnorm", "qt", "quantile", "rbinom",
-             "residuals", "rnorm", "rpois", "runif", "terms","aggregate",
-             "na.omit")
+             "residuals", "rnorm", "rpois", "runif", "terms")
   importFrom("utils", "read.table", "tail", "write.table")
-importFrom("rgeos","gTouches")
-importFrom("Matrix","Matrix")
+  importFrom("rgeos","gTouches")
+  importFrom("Matrix","Matrix")
+  importFrom("rgdal", "readOGR", "writeOGR")
+
+
+

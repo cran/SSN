@@ -259,67 +259,67 @@ plot(sim1preds, pred1DF[,"Sim_Values"], xlab = "True", ylab = "Predicted",
 ######################################
 ## example 2: Binomial data, 1 network
 ######################################
-
-set.seed(102)
+## NOT RUN takes about 10 seconds
+#set.seed(102)
 ## simulate a SpatialStreamNetwork object
-raw2.ssn <- createSSN(n = 20,
-	obsDesign = binomialDesign(100), predDesign = binomialDesign(200),
-	importToR = TRUE, path = paste(tempdir(),"/sim2", sep = ""))
-plot(raw2.ssn)
+#raw2.ssn <- createSSN(n = 20,
+#	obsDesign = binomialDesign(100), predDesign = binomialDesign(200),
+#	importToR = TRUE, path = paste(tempdir(),"/sim2", sep = ""))
+#plot(raw2.ssn)
 
 ## create distance matrices, including between predicted and observed
-createDistMat(raw2.ssn, "preds", o.write=TRUE, amongpred = TRUE)
+#createDistMat(raw2.ssn, "preds", o.write=TRUE, amongpred = TRUE)
 
 ## look at the column names of each of the data frames
-names(raw2.ssn)
+#names(raw2.ssn)
 
 ## extract the observed and predicted data frames
-raw2DFobs <- getSSNdata.frame(raw2.ssn, "Obs")
-raw2DFpred <- getSSNdata.frame(raw2.ssn, "preds")
+#raw2DFobs <- getSSNdata.frame(raw2.ssn, "Obs")
+#raw2DFpred <- getSSNdata.frame(raw2.ssn, "preds")
 
 ## add a continuous covariate randomly
-raw2DFobs[,"X1"] <- rnorm(length(raw2DFobs[,1]))
-raw2DFpred[,"X1"] <- rnorm(length(raw2DFpred[,1]))
+#raw2DFobs[,"X1"] <- rnorm(length(raw2DFobs[,1]))
+#raw2DFpred[,"X1"] <- rnorm(length(raw2DFpred[,1]))
 
 ## add a categorical covariate randomly
-raw2DFobs[,"F1"] <- as.factor(sample.int(3,length(raw2DFobs[,1]), replace = TRUE))
-raw2DFpred[,"F1"] <- as.factor(sample.int(3,length(raw2DFpred[,1]), replace = TRUE))
+#raw2DFobs[,"F1"] <- as.factor(sample.int(3,length(raw2DFobs[,1]), replace = TRUE))
+#raw2DFpred[,"F1"] <- as.factor(sample.int(3,length(raw2DFpred[,1]), replace = TRUE))
 
 ## simulate Binomial data
-sim2.out <- SimulateOnSSN(raw2.ssn,
-	ObsSimDF = raw2DFobs,
-	PredSimDF = raw2DFpred,
-	PredID = "preds",
-	formula = ~ X1 + F1,
-	coefficients = c(0, .5, -1, 1),
-	CorModels = c("Exponential.tailup", "Exponential.taildown",
-		"Exponential.Euclid"),
-	use.nugget = TRUE,
-	use.anisotropy = FALSE,
-	CorParms = c(.5, 5, .5, 5, .5, 2, 0.01),
-	addfunccol = "addfunccol",
-	family = "Binomial")
+#sim2.out <- SimulateOnSSN(raw2.ssn,
+#	ObsSimDF = raw2DFobs,
+#	PredSimDF = raw2DFpred,
+#	PredID = "preds",
+#	formula = ~ X1 + F1,
+#	coefficients = c(0, .5, -1, 1),
+#	CorModels = c("Exponential.tailup", "Exponential.taildown",
+#		"Exponential.Euclid"),
+#	use.nugget = TRUE,
+#	use.anisotropy = FALSE,
+#	CorParms = c(.5, 5, .5, 5, .5, 2, 0.01),
+#	addfunccol = "addfunccol",
+#	family = "Binomial")
 
 ## Columns of design matrix, coefficients argument applied to these
-sim2.out$FixedEffects
+#sim2.out$FixedEffects
 
 ## extract the ssn.object
-sim2.ssn <- sim2.out$ssn.object
+#sim2.ssn <- sim2.out$ssn.object
 
 ## extract the observed and predicted data frames, now with simulated values
-sim2DFobs <- getSSNdata.frame(sim2.ssn, "Obs")
-sim2DFobs[,"Sim_Values"]
-sim2DFpred <- getSSNdata.frame(sim2.ssn, "preds")
-sim2DFpred[,"Sim_Values"]
+#sim2DFobs <- getSSNdata.frame(sim2.ssn, "Obs")
+#sim2DFobs[,"Sim_Values"]
+#sim2DFpred <- getSSNdata.frame(sim2.ssn, "preds")
+#sim2DFpred[,"Sim_Values"]
 
 ## plot the simulated observed values
-plot(sim2.ssn, "Sim_Values", nclasses = 2, color.palette = c("blue","red"),
-	breaktype = "user", brks = cbind(c(-.5,.5),c(.5, 1.5)))
+#plot(sim2.ssn, "Sim_Values", nclasses = 2, color.palette = c("blue","red"),
+#	breaktype = "user", brks = cbind(c(-.5,.5),c(.5, 1.5)))
 
 ## store simulated prediction values, and then create NAs in their place
-sim2preds <- sim2DFpred[,"Sim_Values"]
-sim2DFpred[,"Sim_Values"] <- NA
-sim2.ssn <- putSSNdata.frame(sim2DFpred, sim2.ssn, "preds")
+#sim2preds <- sim2DFpred[,"Sim_Values"]
+#sim2DFpred[,"Sim_Values"] <- NA
+#sim2.ssn <- putSSNdata.frame(sim2DFpred, sim2.ssn, "preds")
 
 # NOT RUN, IT TAKES A MINUTE OR SO
 ## fit a model to see how well we estimate simulation parameters
@@ -328,22 +328,22 @@ sim2.ssn <- putSSNdata.frame(sim2DFpred, sim2.ssn, "preds")
 # 	CorModels = "Exponential.taildown",
 # 	addfunccol = "addfunccol")
 # LOAD A STORED VERSION INSTEAD
-data(modelFits)
+#data(modelFits)
 #make sure fitSimBin has the correct path, will vary for each users installation
 #predictions depend on distance matrix created earlier with createDistMat function
 #path of this lsn directory was created with createSSN
-fitSimBin$ssn.object@path <- paste(tempdir(),"/sim2", sep = "")
-summary(fitSimBin)
+#fitSimBin$ssn.object@path <- paste(tempdir(),"/sim2", sep = "")
+#summary(fitSimBin)
 
 ## make predictions
-predSimBin <- predict(fitSimBin,"preds")
-par(bg = "grey60")
-plot(predSimBin, color.palette = terrain.colors(10))
-par(bg = "white")
+#predSimBin <- predict(fitSimBin,"preds")
+#par(bg = "grey60")
+#plot(predSimBin, color.palette = terrain.colors(10))
+#par(bg = "white")
 
 ## compare predicted values to simulated values
-pred2DF <- getSSNdata.frame(predSimBin, "preds")
-table(sim2preds, (pred2DF[,"Sim_Values"]>0)*1)
+#pred2DF <- getSSNdata.frame(predSimBin, "preds")
+#table(sim2preds, (pred2DF[,"Sim_Values"]>0)*1)
 
 #####################################
 ## example 3: Poisson data, 1 network

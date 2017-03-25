@@ -34,7 +34,8 @@ function(target, predpts, obj.type) {
     if (file.exists(paste(predpts,".shp",sep = ""))==0) {
       stop(paste(predpts,".shp data is missing from ", target@path, " folder",sep = ""))}
 
-    predpoints <- readShapeSpatial(predpts)
+    predpoints <- readOGR(".", predpts, verbose = FALSE)
+    ##predpoints <- readShapeSpatial(predpts)
     rownames(predpoints@data) <- predpoints@data[,"pid"]
     rownames(predpoints@coords) <- predpoints@data[,"pid"]
 

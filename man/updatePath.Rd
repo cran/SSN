@@ -33,4 +33,32 @@ must be updated before using the \code{glmssn} function. The
 Erin E. Peterson \email{support@SpatialStreamNetworks.com}
 }
 
+\examples{
+library(SSN)
 
+## UPDATE PATH FOR SpatialStreamNetwork object
+## NOT RUN
+# mf04p <- importSSN(system.file("lsndata/MiddleFork04.ssn",
+#	  package = "SSN1.1"), predpts = "pred1km", o.write = TRUE)
+#   use SpatialStreamNetwork object mf04p that was already created
+data(mf04p)
+
+## Update the path, which will vary for each users installation
+mf04p <- updatePath(mf04p, system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
+
+
+## UPDATE PATH FOR glmssn object
+## get some model fits stored as data objects
+data(modelFits)
+## NOT RUN
+## Fit a model to binary data
+## binSp <- glmssn(MaxOver20 ~ ELEV_DEM + SLOPE, mf04p,
+##   CorModels = c("Mariah.tailup", "Spherical.taildown"),
+##   family = "binomial", addfunccol = "afvArea")
+
+## make sure binSp has the correct path, will vary for
+## each users installation
+binSp$ssn.object <- updatePath(binSp$ssn.object, 
+	system.file("lsndata/MiddleFork04.ssn", package = "SSN"))
+
+}
