@@ -37,7 +37,10 @@ function(target, predpts, obj.type) {
     predpoints <- readOGR(".", predpts, verbose = FALSE, stringsAsFactors = FALSE,
            integer64 = "allow.loss")
 
-    ##predpoints <- readShapeSpatial(predpts)
+    #############################
+    predpoints@data <- predpoints@data[order(predpoints@data$pid),]
+    predpoints@coords <- predpoints@coords[order(predpoints@data$pid),]
+    ###############################
     rownames(predpoints@data) <- predpoints@data[,"pid"]
     rownames(predpoints@coords) <- predpoints@data[,"pid"]
 

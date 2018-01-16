@@ -26,9 +26,14 @@ function(filepath, predpts = NULL, o.write = FALSE) {
   }
 
   sites <- readOGR(".", "sites",verbose = FALSE, stringsAsFactors = FALSE,
-           integer64 = "allow.loss")
+                   integer64 = "allow.loss")
+#############################
+  sites@data <- sites@data[order(sites@data$pid),]
+  sites@coords <- sites@coords[order(sites@data$pid),]
+###############################
   rownames(sites@data) <- sites@data[,"pid"]
   rownames(sites@coords) <- sites@data[,"pid"]
+
   sites@data$locID <- as.factor(sites@data$locID)
 
   if (exists("sites")==0) {
@@ -117,6 +122,11 @@ function(filepath, predpts = NULL, o.write = FALSE) {
       predpoints <- readOGR(".", predpts, verbose = FALSE, stringsAsFactors = FALSE,
            integer64 = "allow.loss")
       ##predpoints <- readShapeSpatial(predpts)
+###########################################################
+      predpoints@data <- predpoints@data[order(predpoints@data$pid),]
+      predpoints@coords <- predpoints@coords[order(predpoints@data$pid),]
+###########################################################
+
       rownames(predpoints@data) <- predpoints@data[,"pid"]
       rownames(predpoints@coords) <- predpoints@data[,"pid"]
       predpoints@data$locID <- as.factor(predpoints@data$locID)

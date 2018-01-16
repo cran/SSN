@@ -50,8 +50,10 @@ ssn <- importSSN(system.file("lsndata/MiddleFork04.ssn", package = "SSN"),
 
 ssn.sub1 <- subsetSSN(ssn, filename = 
   paste(tempdir(),"/subset1.ssn", sep = ""), subset = Summer_mn > 13)
-ssn.sub2 <- subsetSSN(ssn, filename = 
-  paste(tempdir(),"/subset2.ssn", sep = ""), subset = netID == 1, clip = TRUE)
+
+# another example
+#ssn.sub2 <- subsetSSN(ssn, filename = 
+#  paste(tempdir(),"/subset2.ssn", sep = ""), subset = netID == 1, clip = TRUE)
 
 
 }
