@@ -27,8 +27,7 @@ function(x, VariableName = NULL, VarPlot = "Both",
         par(mar = c(5,5,3,0))
         plot(x$ssn.object@bbox[1,],x$ssn.object@bbox[2,], type = "n",
              xlab = "x-coordinate", ylab = "y-coordinate",
-             main = paste("Prediction Variable = ", zcol, ":  Plotting", VarPlot),
-             cex.main = .9, ...)
+             main = paste("Prediction Variable = ", zcol, ":  Plotting", VarPlot), ...)
         for(i in 1:length(x$ssn.object@lines))
             for(j in 1:length(x$ssn.object@lines[[i]]))
                 lines((x$ssn.object@lines[[i]]@Lines[[j]]@coords), ...)
