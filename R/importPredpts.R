@@ -37,9 +37,13 @@ function(target, predpts, obj.type) {
     predpoints <- readOGR(".", predpts, verbose = FALSE, stringsAsFactors = FALSE,
            integer64 = "allow.loss")
 
-    #############################
-    predpoints@data <- predpoints@data[order(predpoints@data$pid),]
-    predpoints@coords <- predpoints@coords[order(predpoints@data$pid),]
+#############################
+    ord = order(predpoints@data$pid)
+    predpoints@data <- predpoints@data[ord,]
+    predpoints@coords <- predpoints@coords[ord,]
+
+    ## predpoints@data <- predpoints@data[order(predpoints@data$pid),]
+    ## predpoints@coords <- predpoints@coords[order(predpoints@data$pid),]
     ###############################
     rownames(predpoints@data) <- predpoints@data[,"pid"]
     rownames(predpoints@coords) <- predpoints@data[,"pid"]

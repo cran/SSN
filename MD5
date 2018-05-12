@@ -1,4 +1,4 @@
-1765961201bbec6772d4c1e1e5416245 *DESCRIPTION
+5b745cb22de06be1833e81e53f41c2a8 *DESCRIPTION
 d30d05fbdcf8f48e5d798d99574fc132 *NAMESPACE
 80379c3434ec8931e6d5f614ca53e43d *R/AIC.glmssn.R
 634c6de4842b2a3c9c20b598527cabee *R/BLUP.R
@@ -44,8 +44,8 @@ e739dfc68219d9dac4adc79009153c49 *R/getStreamDistMat.R
 d7d48049f9b8a645456c8a68264c0f21 *R/glmssn1.R
 4f91fc5d2ed478839ae4bc7df6033456 *R/hist.SpatialStreamNetwork.r
 3f9fd42516da454e546440e66190f271 *R/hist.influenceSSN.r
-d50ed9294cf72dc09633e8d57bf735dd *R/importPredpts.R
-36d808fd7c4e5ad1ebb8facab53d186b *R/importSSN.R
+ab980a9b281d6cd851f90e67dc768111 *R/importPredpts.R
+04ff9ab3211963b57975c87aca0c5b98 *R/importSSN.R
 c59f1468ee003581e2fd866bd016f7e9 *R/invall.R
 468b39eb43055715ea4321500c756d21 *R/lin.taildown.R
 b33e595c80a10b203bfc7ef47ee3bd28 *R/lin.tailup.R
@@ -84,9 +84,9 @@ de0d17ae43ec430909ab225ab69b6251 *R/updatePath.r
 5675ce490a26fa6ffcd6757c5a74f3de *R/writeSSN.r
 29d3a8311c0461f3513137a735d28cec *R/xyplot.EmpiricalSemivariogramSSN.R
 ba5dffedf4421587cfd6101453881e8a *data/datalist
-05b6985281be6b22b6412bd75f22cbc4 *data/mf04.rda
-040207a01e9204889e4faf39f3330a01 *data/mf04p.rda
-1127522b998395e6592abdf713e31fad *data/modelFits.rda
+7617313ab7fd860cbde3c4794040685b *data/mf04.rda
+e47e29a490cf52fcafe93ee4136f7998 *data/mf04p.rda
+1f351aaadfff59a8dea353f43703e265 *data/modelFits.rda
 9f64b15c326d6723adcebb8606896b9d *inst/CITATION
 b3c091896f0b7a3bcc82cc0b485a3f72 *inst/doc/SSN.R
 1b821ad6ad4268b51a05a60c7f40c536 *inst/doc/SSN.pdf

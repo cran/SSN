@@ -28,8 +28,14 @@ function(filepath, predpts = NULL, o.write = FALSE) {
   sites <- readOGR(".", "sites",verbose = FALSE, stringsAsFactors = FALSE,
                    integer64 = "allow.loss")
 #############################
-  sites@data <- sites@data[order(sites@data$pid),]
-  sites@coords <- sites@coords[order(sites@data$pid),]
+  ## The following two lines are a bug.
+  ## The second line will not be re-ordered
+      ##sites@data <- sites@data[order(sites@data$pid),]
+      ##sites@coords <- sites@coords[order(sites@data$pid),]
+      ## following 3 lines changed by Jay, 11 May 2018
+      ord = order(sites@data$pid)
+      sites@data <- sites@data[ord,]
+      sites@coords <- sites@coords[ord,]
 ###############################
   rownames(sites@data) <- sites@data[,"pid"]
   rownames(sites@coords) <- sites@data[,"pid"]
@@ -123,8 +129,14 @@ function(filepath, predpts = NULL, o.write = FALSE) {
            integer64 = "allow.loss")
       ##predpoints <- readShapeSpatial(predpts)
 ###########################################################
-      predpoints@data <- predpoints@data[order(predpoints@data$pid),]
-      predpoints@coords <- predpoints@coords[order(predpoints@data$pid),]
+			# The following two lines are a bug.  The second line will not be re-ordered
+      #predpoints@data <- predpoints@data[order(predpoints@data$pid),]
+      #predpoints@coords <- predpoints@coords[order(predpoints@data$pid),]
+      # following 3 lines changed by Jay, 11 May 2018
+      ord = order(predpoints@data$pid)
+      predpoints@data <- predpoints@data[ord,]
+      predpoints@coords <- predpoints@coords[ord,]
+
 ###########################################################
 
       rownames(predpoints@data) <- predpoints@data[,"pid"]
