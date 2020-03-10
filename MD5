@@ -1,5 +1,5 @@
-04fb3497f81effb38ccf6d4feb244086 *DESCRIPTION
-d30d05fbdcf8f48e5d798d99574fc132 *NAMESPACE
+1c8231f150cb85b1004d3e7e3e59aecb *DESCRIPTION
+7d4fe3c10589e700990e11e286a8b07a *NAMESPACE
 80379c3434ec8931e6d5f614ca53e43d *R/AIC.glmssn.R
 634c6de4842b2a3c9c20b598527cabee *R/BLUP.R
 ef602da90e967e7bcbdffe53563a93a0 *R/BlockPredict.R
@@ -45,7 +45,7 @@ ac6fa82834f90a56a84fba4499955cf0 *R/glmssn1.R
 4f91fc5d2ed478839ae4bc7df6033456 *R/hist.SpatialStreamNetwork.r
 3f9fd42516da454e546440e66190f271 *R/hist.influenceSSN.r
 ab980a9b281d6cd851f90e67dc768111 *R/importPredpts.R
-04ff9ab3211963b57975c87aca0c5b98 *R/importSSN.R
+ec94d335f20acd3b093aaa6c937a18a9 *R/importSSN.R
 c59f1468ee003581e2fd866bd016f7e9 *R/invall.R
 468b39eb43055715ea4321500c756d21 *R/lin.taildown.R
 b33e595c80a10b203bfc7ef47ee3bd28 *R/lin.tailup.R
@@ -70,8 +70,6 @@ c43418a8f3f6ff4ec38f7daa53782e77 *R/show_SpatialStreamNetwork.R
 7c03d90cd3a1599e3712cb2018eb0bfb *R/sph.Euclid.R
 fd003e2db9484844dd84341685ceb152 *R/sph.taildown.R
 93970060cc280bc334d3efce6e177b25 *R/sph.tailup.R
-0ebf27499dea334bfab1d5f154aef0fd *R/split.predictions.R
-d29e0a17bf0ac8d5f5193ed5f8a162b3 *R/subsetSSN.r
 6ba194f1bf4136f38ac21400442d96b1 *R/summary.SpatialStreamNetwork.R
 44ba3b3c2edeee22eb5a7a4ce685f1f8 *R/summary.glmssn.R
 435975505ba01fad49162a51db3485fa *R/summary.glmssn.predict.R
@@ -81,12 +79,11 @@ d29e0a17bf0ac8d5f5193ed5f8a162b3 *R/subsetSSN.r
 de0d17ae43ec430909ab225ab69b6251 *R/updatePath.r
 142e97cea7c0b4c21f1f24f133ee5ffb *R/varcomp.glmssn.R
 2e071a8a7dafa4b903e9c40838ed44e6 *R/write.dbf.SSN.r
-5675ce490a26fa6ffcd6757c5a74f3de *R/writeSSN.r
 29d3a8311c0461f3513137a735d28cec *R/xyplot.EmpiricalSemivariogramSSN.R
 ba5dffedf4421587cfd6101453881e8a *data/datalist
-931a41a6b6f9a58f6c2c078f9a84c8dc *data/mf04.rda
-bf0f9315d6d451ac394221da9712da7e *data/mf04p.rda
-264fd0be7929f1d39b1cb366aa77bbff *data/modelFits.rda
+9b44022dbd0c6954430b6405286c65ef *data/mf04.rda
+4501ecea1098b2bd6e8d051f9fe2a841 *data/mf04p.rda
+98cd9e00d9760215b1bb5588e6176aa6 *data/modelFits.rda
 9f64b15c326d6723adcebb8606896b9d *inst/CITATION
 b3c091896f0b7a3bcc82cc0b485a3f72 *inst/doc/SSN.R
 1b821ad6ad4268b51a05a60c7f40c536 *inst/doc/SSN.pdf
@@ -190,12 +187,9 @@ c4e6db5cc4c64030aaf5a116a46fd519 *man/glmssn-class.Rd
 7d3176e4bba75accbe3731edbea66f7c *man/print.summary.glmssn.Rd
 71d1558c06db0ab1a36857b5771ec855 *man/putSSNdata.frame.Rd
 7d06a04e5404926a3581213bd22361e2 *man/residuals.glmssn.Rd
-9d167ce437b9cd0dfa844cd173d8584e *man/splitPredictions.Rd
-1161b50c19e99010a5fecbbbdbe536b8 *man/subsetSSN.Rd
 4d69662c48c4d8575d2077decfba0ce0 *man/summary.glmssn.Rd
 76040a0c09192e27a0231000c7ade321 *man/updatePath.Rd
 a24f3a98d37995e0e6ebaa0610c37911 *man/varcomp.Rd
-20a708ce099bf7970bbc0648758bf70e *man/writeSSN.Rd
 f3a3d7de497c5b4c4b5a9ab174295bbc *src/RdbfwriteSSN.c
 9d693b59a5fbf3d7fcd59517dba113f7 *src/dbfopenSSN.c
 cfc2bf9ed9a081dce6ec469213464822 *src/foreignSSN.h

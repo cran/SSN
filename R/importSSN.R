@@ -27,16 +27,9 @@ function(filepath, predpts = NULL, o.write = FALSE) {
 
   sites <- readOGR(".", "sites",verbose = FALSE, stringsAsFactors = FALSE,
                    integer64 = "allow.loss")
-#############################
-  ## The following two lines are a bug.
-  ## The second line will not be re-ordered
-      ##sites@data <- sites@data[order(sites@data$pid),]
-      ##sites@coords <- sites@coords[order(sites@data$pid),]
-      ## following 3 lines changed by Jay, 11 May 2018
       ord = order(sites@data$pid)
       sites@data <- sites@data[ord,]
       sites@coords <- sites@coords[ord,]
-###############################
   rownames(sites@data) <- sites@data[,"pid"]
   rownames(sites@coords) <- sites@data[,"pid"]
 
@@ -114,7 +107,8 @@ function(filepath, predpts = NULL, o.write = FALSE) {
     network.point.coords = network.point.coords,
     point.coords = sites@coords,
     point.data = sites@data,
-    points.bbox = sites@bbox)
+    points.bbox = sites@bbox,
+    proj4string = sites@proj4string)
 
   #Create SSNPoints list for input into SSN object
   ops<-new("SSNPoints")
@@ -168,7 +162,8 @@ function(filepath, predpts = NULL, o.write = FALSE) {
         network.point.coords = network.point.coords,
         point.coords = predpoints@coords,
         point.data = predpoints@data,
-        points.bbox = predpoints@bbox)
+        points.bbox = predpoints@bbox,
+        proj4string = predpoints@proj4string)
 
 #        ssn@predpoints@SSNPoints[[1]]<- pp
 #        ssn@predpoints@ID[[1]]<- predpts
