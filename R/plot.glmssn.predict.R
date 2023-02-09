@@ -5,7 +5,7 @@ function(x, VariableName = NULL, VarPlot = "Both",
   SEcex.min = 0.5, SEcex.max = 2, brks = NULL, add = FALSE, ...)
 {
     par.orig <- par(no.readonly = TRUE)
-    if(class(x) != "glmssn.predict") return("Not a glmssn.predict object")
+    if(class(x)[[1]] != "glmssn.predict") return("Not a glmssn.predict object")
     if(!any(VarPlot == c("Both", "Predictions", "Standard Errors")))
 	return("VarPlot must be one of Both, Predictions, or Standard Errors")
     if(!any(breaktype == c("quantile", "even", "user")))

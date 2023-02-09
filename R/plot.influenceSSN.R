@@ -3,7 +3,7 @@ function(x, color.palette = NULL, nclasses = NULL,
 	inflcol = "_resid_", breaktype = "quantile", brks = NULL, pch = 19, ...)
 {
     par.orig <- par(no.readonly = TRUE)
-    if(class(x) != "influenceSSN") return("Not a influenceSSN object")
+    if(class(x)[[1]] != "influenceSSN") return("Not a influenceSSN object")
     layout(matrix(1:2, nrow = 1), widths = c(4,1))
     par(mar = c(5,5,3,0))
     plot(x$ssn.object@bbox[1,],x$ssn.object@bbox[2,], type = "n",

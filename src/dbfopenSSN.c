@@ -202,6 +202,7 @@
 # define R_atof atof
 #endif
 
+
 #ifndef FALSE
 #  define FALSE		0
 #  define TRUE		1
@@ -209,6 +210,22 @@
 
 static int	nStringFieldLen = 0;
 static char * pszStringField = NULL;
+
+#define CPLsprintf sprintf
+#define CPLsnprintf snprintf
+
+#ifdef __cplusplus
+#define STATIC_CAST(type,x) static_cast<type>(x)
+#define REINTERPRET_CAST(type,x) reinterpret_cast<type>(x)
+#define CONST_CAST(type,x) const_cast<type>(x)
+#define SHPLIB_NULLPTR nullptr
+#else
+#define STATIC_CAST(type,x) ((type)(x))
+#define REINTERPRET_CAST(type,x) ((type)(x))
+#define CONST_CAST(type,x) ((type)(x))
+#define SHPLIB_NULLPTR NULL
+#endif
+
 
 /************************************************************************/
 /*                             SfRealloc()                              */
@@ -536,7 +553,8 @@ DBFCreate( const char * pszFilename )
 	pszBasename[i] = '\0';
 
     pszFullname = (char *) malloc(strlen(pszBasename) + 5);
-    sprintf( pszFullname, "%s.dbf", pszBasename );
+    /* sprintf( pszFullname, "%s.dbf", pszBasename ); */
+    snprintf( pszFullname, 200, "%s.dbf", pszBasename);
     free( pszBasename );
 
 /* -------------------------------------------------------------------- */
@@ -1096,8 +1114,14 @@ static int DBFWriteAttributeSSN(DBFHandle psDBF, int hEntity, int iField,
 	    if( sizeof(szSField)-2 < nWidth )
 		nWidth = sizeof(szSField)-2;
 
-	    sprintf( szFormat, "%%%dd", nWidth );
-	    sprintf(szSField, szFormat, (int) *((double *) pValue) );
+	    /*sprintf( szFormat, "%%%dd", nWidth );
+	    sprintf(szSField, szFormat, (int) *((double *) pValue) );*/
+            snprintf( szFormat, sizeof(szFormat), "%%%d.%df",
+                    nWidth, psDBF->panFieldDecimals[iField] );
+            CPLsnprintf(szSField, sizeof(szSField), szFormat, *STATIC_CAST(double *, pValue) );
+            szSField[sizeof(szSField)-1] = '\0';
+
+	    
 	    if( (int)strlen(szSField) > psDBF->panFieldSize[iField] )
 	    {
 		szSField[psDBF->panFieldSize[iField]] = '\0';
@@ -1116,10 +1140,23 @@ static int DBFWriteAttributeSSN(DBFHandle psDBF, int hEntity, int iField,
 	    if( sizeof(szSField)-2 < nWidth )
 		nWidth = sizeof(szSField)-2;
 
+            /*---------------------------------------------------*/
+	    /*Original line of code replaced in SSN v1.1 */
 	    /*sprintf( szFormat, "%%%d.%df",
 		     nWidth, psDBF->panFieldDecimals[iField] );*/
-		sprintf(szFormat, "%%.%de", nWidth - 8);
-	    sprintf(szSField, szFormat, *((double *) pValue) );
+	    
+	    /* Update in SSN 1.1 to add additional decimal places 
+	       sprintf(szFormat, "%%.%de", nWidth - 8);
+	       sprintf(szSField, szFormat, *((double *) pValue) ); */
+
+	    /* New update to remove use of sprintf */	    
+	    snprintf( szFormat, sizeof(szFormat), "%%.%de", nWidth-8 ); 
+	    snprintf(szSField, sizeof(szSField), szFormat,*STATIC_CAST(double *, pValue) );
+	     szSField[sizeof(szSField)-1] = '\0';
+		
+	    /*--------------------------------------------------*/
+	    
+
 	    if( (int) strlen(szSField) > psDBF->panFieldSize[iField] )
 	    {
 		szSField[psDBF->panFieldSize[iField]] = '\0';
