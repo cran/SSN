@@ -1,6 +1,8 @@
 importPredpts <-
 function(target, predpts, obj.type) {
 
+	suppressWarnings({
+
     old_wd <- getwd()
     on.exit(setwd(old_wd))
 
@@ -80,5 +82,6 @@ function(target, predpts, obj.type) {
       target$ssn.object@predpoints@ID[[pred.num + 1]]<-predpts}
 
     target
+})
 }
 

@@ -1,6 +1,8 @@
 importSSN <-
 function(filepath, predpts = NULL, o.write = FALSE) {
 
+	suppressWarnings({
+	
   old.wd <- getwd()
 
   Path <- dirname(filepath)
@@ -202,6 +204,6 @@ function(filepath, predpts = NULL, o.write = FALSE) {
   #end of function
   ssn
 
-
+})
 }
 

@@ -158,7 +158,7 @@ plot(ssnpred, VarPlot = "Standard Errors", breaktype = "even")
 ## colours, but the actual range of standard errors requires a fifth break
 ## point and a fifth colour (see legend on RHS) chosen by default
 plot(ssnpred, VarPlot = "Standard Errors", breaktype = "user",
- brks = seq(0,2.4,by=0.6), color.palette = c("darkblue", "purple",
+ brks = seq(0,3.6,by=0.9), color.palette = c("darkblue", "purple",
    "green", "red"))
 
 ## add predictions to colored observations
